@@ -6,8 +6,7 @@ import '@/lib/env';
 
 import ButtonLink from '@/components/links/ButtonLink';
 import UnderlineLink from '@/components/links/UnderlineLink';
-import styles from "./(customer)/customer/styles/home.module.css"; 
-import IntResizing  from "./(customer)/customer/components/IntResizing"; 
+import IntResizing from "./(customer)/customer/components/IntResizing";
 
 /**
  * SVGR Support
@@ -28,15 +27,15 @@ export default function HomePage() {
       <Head>
         <title>Hemly</title>
       </Head>
-      <div className={styles.title}>
+      <div>
         <h1>Hemly</h1>
         <p>The best decentralized clothing alteration platform</p>
       </div>
       <section className='bg-white'>
-        <div className= {styles.mainContainer}>
+        <div>
           <div className="resizing">
             <p>Interactive Resizing Placeholder</p>
-              <IntResizing/>
+            <IntResizing />
           </div>
           <div className="options">
             <p>Resizing Options Placeholder</p>
@@ -45,9 +44,9 @@ export default function HomePage() {
             <p>NavBar Placeholder</p>
           </div>
         </div>
-        
+
       </section>
-                {/* <ButtonLink className='mt-6' href='/components' variant='light'>
+      {/* <ButtonLink className='mt-6' href='/components' variant='light'>
             See all components
           </ButtonLink>
 
