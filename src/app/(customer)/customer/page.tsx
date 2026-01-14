@@ -1,7 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
-import { Download } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
 
 export default function PantsAlterationApp() {
 	const [currentMeasurements, setCurrentMeasurements] = useState({
@@ -19,6 +18,42 @@ export default function PantsAlterationApp() {
 	const [garmentType, setGarmentType] = useState('jeans');
 	const [hoveredMeasurement, setHoveredMeasurement] = useState<string | null>(null);
 	const [clickedMeasurement, setClickedMeasurement] = useState<string | null>(null);
+	const selectedRef = useRef<HTMLDivElement | null>(null);
+	const svgContainerRef = useRef<HTMLDivElement | null>(null);
+
+	// Handle clicks outside the tooltip to close it
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			// If clicking on the tooltip itself, don't close
+			if (selectedRef.current && selectedRef.current.contains(event.target as Node)) {
+				return;
+			}
+			
+			// Check if clicking on an interactive SVG label (g element with cursor pointer style)
+			const target = event.target as HTMLElement;
+			const gElement = target.closest('g');
+			if (gElement) {
+				const style = gElement.getAttribute('style');
+				if (style && style.includes('cursor: pointer')) {
+					return; // Don't close if clicking on a label
+				}
+			}
+			
+			// Close the tooltip if clicking anywhere else (including SVG background, other parts of the page, etc.)
+			if (clickedMeasurement) {
+				setClickedMeasurement(null);
+				setHoveredMeasurement(null);
+			}
+		};
+
+		if (clickedMeasurement) {
+			document.addEventListener('mousedown', handleClickOutside);
+		}
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [clickedMeasurement]);
 
 	const handleCurrentChange = (field: any, value: any) => {
 		setCurrentMeasurements(prev => ({
@@ -157,11 +192,7 @@ export default function PantsAlterationApp() {
 					</div>
 
 					{/* Right Panel - Visual Representation */}
-					<div className="bg-white rounded-2xl shadow-lg p-4 overflow-auto" onClick={(e) => {
-						if (e.target === e.currentTarget || !(e.target as Element).closest('g')) {
-							setClickedMeasurement(null);
-						}
-					}}>
+					<div className="bg-white rounded-2xl shadow-lg p-4 overflow-auto" ref={svgContainerRef}>
 						<h2 className="text-xl font-semibold text-slate-800 mb-4">Visual Preview</h2>
 
 						{/* Changes Summary */}
@@ -190,7 +221,7 @@ export default function PantsAlterationApp() {
 						</div>
 
 						{/* SVG Visualization */}
-						<div className="flex justify-center items-center relative">
+						<div className="flex justify-center items-center relative" ref={svgContainerRef}>
 							<svg viewBox="0 0 399.01 927.07" className="w-full max-w-sm" style={{ maxHeight: '500px' }}>
 								<g id="pant">
 									{/* Original pants (dashed gray) */}
@@ -242,13 +273,24 @@ export default function PantsAlterationApp() {
 									{/* Interactive labels */}
 									{/* Waist label */}
 									<g
-										onMouseEnter={() => setHoveredMeasurement('waist')}
-										onMouseLeave={() => setHoveredMeasurement(null)}
-										onClick={() => setClickedMeasurement(clickedMeasurement === 'waist' ? null : 'waist')}
-
+										onMouseEnter={() => {
+											if (!clickedMeasurement) {
+												setHoveredMeasurement('waist');
+											}
+										}}
+										onMouseLeave={() => {
+											if (!clickedMeasurement) {
+												setHoveredMeasurement(null);
+											}
+										}}
+										onClick={(e) => {
+											e.stopPropagation();
+											setClickedMeasurement('waist');
+											setHoveredMeasurement(null);
+										}}
 										style={{ cursor: 'pointer' }}
 									>
-										<circle cx="199" cy="15" r="25" fill={hoveredMeasurement || clickedMeasurement === 'waist' ? '#dbeafe' : 'transparent'} />
+										<circle cx="199" cy="15" r="25" fill={hoveredMeasurement === 'waist' || clickedMeasurement === 'waist' ? '#dbeafe' : 'transparent'} />
 										<text x="199" y="12" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
 											Waist
 										</text>
@@ -259,11 +301,24 @@ export default function PantsAlterationApp() {
 
 									{/* Inseam label (left side) */}
 									<g
-										onMouseEnter={() => setHoveredMeasurement('inseam')}
-										onMouseLeave={() => setHoveredMeasurement(null)}
+										onMouseEnter={() => {
+											if (!clickedMeasurement) {
+												setHoveredMeasurement('inseam');
+											}
+										}}
+										onMouseLeave={() => {
+											if (!clickedMeasurement) {
+												setHoveredMeasurement(null);
+											}
+										}}
+										onClick={(e) => {
+											e.stopPropagation();
+											setClickedMeasurement('inseam');
+											setHoveredMeasurement(null);
+										}}
 										style={{ cursor: 'pointer' }}
 									>
-										<circle cx="40" cy="470" r="30" fill={hoveredMeasurement === 'inseam' ? '#dbeafe' : 'transparent'} />
+										<circle cx="40" cy="470" r="30" fill={hoveredMeasurement === 'inseam' || clickedMeasurement === 'inseam' ? '#dbeafe' : 'transparent'} />
 										<text x="40" y="467" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
 											Inseam
 										</text>
@@ -274,11 +329,24 @@ export default function PantsAlterationApp() {
 
 									{/* Leg Opening label */}
 									<g
-										onMouseEnter={() => setHoveredMeasurement('legOpening')}
-										onMouseLeave={() => setHoveredMeasurement(null)}
+										onMouseEnter={() => {
+											if (!clickedMeasurement) {
+												setHoveredMeasurement('legOpening');
+											}
+										}}
+										onMouseLeave={() => {
+											if (!clickedMeasurement) {
+												setHoveredMeasurement(null);
+											}
+										}}
+										onClick={(e) => {
+											e.stopPropagation();
+											setClickedMeasurement('legOpening');
+											setHoveredMeasurement(null);
+										}}
 										style={{ cursor: 'pointer' }}
 									>
-										<circle cx="199" cy="905" r="30" fill={hoveredMeasurement === 'legOpening' ? '#dbeafe' : 'transparent'} />
+										<circle cx="199" cy="905" r="30" fill={hoveredMeasurement === 'legOpening' || clickedMeasurement === 'legOpening' ? '#dbeafe' : 'transparent'} />
 										<text x="199" y="900" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
 											Leg
 										</text>
@@ -302,27 +370,29 @@ export default function PantsAlterationApp() {
 							</svg>
 
 							{/* Hover tooltip */}
-							{(hoveredMeasurement || clickedMeasurement) && (
-								<div className="absolute top-0 right-0 bg-white border-2 border-blue-500 rounded-lg p-3 shadow-xl z-10 max-w-xs">
-									<h4 className="font-semibold text-slate-700 mb-2 capitalize text-sm">{hoveredMeasurement}</h4>
-									<div className="space-y-2">
-										<div className="text-xs">
-											<span className="text-slate-600">Current: </span>
-											<span className="font-semibold">{currentMeasurements[hoveredMeasurement as keyof typeof currentMeasurements]}"</span>
-										</div>
-										<div>
-											<label className="block text-xs text-slate-600 mb-1">New Value (inches):</label>
-											<input
-												type="number"
-												value={desiredMeasurements[hoveredMeasurement as keyof typeof desiredMeasurements]}
-												onChange={(e) => handleDesiredChange(hoveredMeasurement, e.target.value)}
-												step="0.5"
-												className="w-full p-1.5 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-											/>
+							<div ref={selectedRef} onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
+								{(clickedMeasurement || hoveredMeasurement) && (
+									<div className="absolute top-0 right-0 bg-white rounded-lg p-3 shadow-xl z-10 max-w-xs">
+										<h4 className="font-semibold text-slate-700 mb-2 capitalize text-sm">{clickedMeasurement ?? hoveredMeasurement}</h4>
+										<div className="space-y-2">
+											<div className="text-xs">
+												<span className="text-slate-600">Current: </span>
+												<span className="font-semibold">{currentMeasurements[(clickedMeasurement ?? hoveredMeasurement) as keyof typeof currentMeasurements]}"</span>
+											</div>
+											<div>
+												<label className="block text-xs text-slate-600 mb-1">New Value (inches):</label>
+												<input
+													type="number"
+													value={desiredMeasurements[(clickedMeasurement ?? hoveredMeasurement) as keyof typeof desiredMeasurements]}
+													onChange={(e) => handleDesiredChange((clickedMeasurement ?? hoveredMeasurement)!, e.target.value)}
+													step="0.5"
+													className="w-full p-1.5 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+												/>
+											</div>
 										</div>
 									</div>
-								</div>
-							)}
+								)}
+							</div>
 						</div>
 					</div>
 				</div>
