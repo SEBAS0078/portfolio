@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react';
+import PantsSVG from './vectors/PantsSVG';
 
 export default function PantsAlterationApp() {
 	const [currentMeasurements, setCurrentMeasurements] = useState({
@@ -222,177 +223,64 @@ export default function PantsAlterationApp() {
 
 						{/* SVG Visualization */}
 						<div className="flex justify-center items-center relative" ref={svgContainerRef}>
-							<svg viewBox="0 0 399.01 927.07" className="w-full max-w-sm" style={{ maxHeight: '500px' }}>
-								<g id="pant">
-									{/* Original pants (dashed gray) */}
-									<g opacity="0.3">
-										<path d="M.5,915.12C26.28,619.64,50.28,324.64,74.49,29.98"
-											fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" />
-										<path d="M169.76,926.57c-56.02-2.2-113.01-8.21-169.26-11.45"
-											fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" />
-										<polyline points="169.76 926.57 200.76 248.51 207.62 332.35 211.4 412.14 214.16 510.12 218.34 611.36 221.7 737.55 227.15 877.04 229.46 923.41"
-											fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" />
-										<line x1="199.64" y1="29.2" x2="200.76" y2="248.51"
-											stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" />
-										<line x1="74.55" y1="31.68" x2="82.82" y2="2.9"
-											stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" />
-										<path d="M398.51,913.18c-25.78-295.48-49.78-590.48-73.99-885.14"
-											fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" />
-										<path d="M398.51,913.18c-55.83,5.08-113.12,6.5-169.32,10.58"
-											fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" />
-										<line x1="74.5" y1="31.68" x2="324.51" y2="27.67"
-											stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" />
-										<line x1="316.24" y1=".89" x2="324.51" y2="29.68"
-											stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" />
-										<line x1="82.41" y1="2.74" x2="316.71" y2=".5"
-											stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" />
-									</g>
-
-									{/* Desired pants (solid blue) */}
-									<path id="left_inseam" d="M.5,915.12C26.28,619.64,50.28,324.64,74.49,29.98"
-										fill="none" stroke="#2563eb" strokeWidth="2.5" />
-									<path id="left_bottom" d="M169.76,926.57c-56.02-2.2-113.01-8.21-169.26-11.45"
-										fill="none" stroke="#2563eb" strokeWidth="2.5" />
-									<polyline id="between_leg" points="169.76 926.57 200.76 248.51 207.62 332.35 211.4 412.14 214.16 510.12 218.34 611.36 221.7 737.55 227.15 877.04 229.46 923.41"
-										fill="none" stroke="#2563eb" strokeWidth="2.5" />
-									<line x1="199.64" y1="29.2" x2="200.76" y2="248.51"
-										stroke="#2563eb" strokeWidth="2.5" />
-									<line id="middle_line" x1="74.55" y1="31.68" x2="82.82" y2="2.9"
-										stroke="#2563eb" strokeWidth="2.5" />
-									<path id="right_inseam" d="M398.51,913.18c-25.78-295.48-49.78-590.48-73.99-885.14"
-										fill="none" stroke="#2563eb" strokeWidth="2.5" />
-									<path id="right_bottom" d="M398.51,913.18c-55.83,5.08-113.12,6.5-169.32,10.58"
-										fill="none" stroke="#2563eb" strokeWidth="2.5" />
-									<line id="seam_connector" x1="74.5" y1="31.68" x2="324.51" y2="27.67"
-										stroke="#2563eb" strokeWidth="2.5" />
-									<line id="right_upper_vertical_side_waiste" x1="316.24" y1=".89" x2="324.51" y2="29.68"
-										stroke="#2563eb" strokeWidth="2.5" />
-									<line id="upper_connector" x1="82.41" y1="2.74" x2="316.71" y2=".5"
-										stroke="#2563eb" strokeWidth="2.5" />
-
-									{/* Interactive labels */}
-									{/* Waist label */}
-									<g
-										onMouseEnter={() => {
-											if (!clickedMeasurement) {
-												setHoveredMeasurement('waist');
-											}
-										}}
-										onMouseLeave={() => {
-											if (!clickedMeasurement) {
-												setHoveredMeasurement(null);
-											}
-										}}
-										onClick={(e) => {
-											e.stopPropagation();
-											setClickedMeasurement('waist');
-											setHoveredMeasurement(null);
-										}}
-										style={{ cursor: 'pointer' }}
-									>
-										<circle cx="199" cy="15" r="25" fill={hoveredMeasurement === 'waist' || clickedMeasurement === 'waist' ? '#dbeafe' : 'transparent'} />
-										<text x="199" y="12" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
-											Waist
-										</text>
-										<text x="199" y="23" textAnchor="middle" fontSize="10" fill="#475569">
-											{desiredMeasurements.waist}"
-										</text>
-									</g>
-
-									{/* Inseam label (left side) */}
-									<g
-										onMouseEnter={() => {
-											if (!clickedMeasurement) {
-												setHoveredMeasurement('inseam');
-											}
-										}}
-										onMouseLeave={() => {
-											if (!clickedMeasurement) {
-												setHoveredMeasurement(null);
-											}
-										}}
-										onClick={(e) => {
-											e.stopPropagation();
-											setClickedMeasurement('inseam');
-											setHoveredMeasurement(null);
-										}}
-										style={{ cursor: 'pointer' }}
-									>
-										<circle cx="40" cy="470" r="30" fill={hoveredMeasurement === 'inseam' || clickedMeasurement === 'inseam' ? '#dbeafe' : 'transparent'} />
-										<text x="40" y="467" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
-											Inseam
-										</text>
-										<text x="40" y="478" textAnchor="middle" fontSize="10" fill="#475569">
-											{desiredMeasurements.inseam}"
-										</text>
-									</g>
-
-									{/* Leg Opening label */}
-									<g
-										onMouseEnter={() => {
-											if (!clickedMeasurement) {
-												setHoveredMeasurement('legOpening');
-											}
-										}}
-										onMouseLeave={() => {
-											if (!clickedMeasurement) {
-												setHoveredMeasurement(null);
-											}
-										}}
-										onClick={(e) => {
-											e.stopPropagation();
-											setClickedMeasurement('legOpening');
-											setHoveredMeasurement(null);
-										}}
-										style={{ cursor: 'pointer' }}
-									>
-										<circle cx="199" cy="905" r="30" fill={hoveredMeasurement === 'legOpening' || clickedMeasurement === 'legOpening' ? '#dbeafe' : 'transparent'} />
-										<text x="199" y="900" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
-											Leg
-										</text>
-										<text x="199" y="911" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
-											Opening
-										</text>
-										<text x="199" y="922" textAnchor="middle" fontSize="10" fill="#475569">
-											{desiredMeasurements.legOpening}"
-										</text>
-									</g>
-								</g>
-
-								{/* Legend */}
-								<g transform="translate(20, 890)">
-									<line x1="0" y1="0" x2="30" y2="0" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" />
-									<text x="35" y="5" fontSize="11" fill="#64748b">Current</text>
-
-									<line x1="100" y1="0" x2="130" y2="0" stroke="#2563eb" strokeWidth="2" />
-									<text x="135" y="5" fontSize="11" fill="#64748b">Desired</text>
-								</g>
-							</svg>
+							<PantsSVG
+								hoveredMeasurement={hoveredMeasurement}
+								clickedMeasurement={clickedMeasurement}
+								desiredMeasurements={desiredMeasurements}
+								onHoverChange={setHoveredMeasurement}
+								onClick={(measurement) => {
+									setClickedMeasurement(measurement);
+									setHoveredMeasurement(null);
+								}}
+							/>
 
 							{/* Hover tooltip */}
-							<div ref={selectedRef} onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
-								{(clickedMeasurement || hoveredMeasurement) && (
-									<div className="absolute top-0 right-0 bg-white rounded-lg p-3 shadow-xl z-10 max-w-xs">
-										<h4 className="font-semibold text-slate-700 mb-2 capitalize text-sm">{clickedMeasurement ?? hoveredMeasurement}</h4>
-										<div className="space-y-2">
-											<div className="text-xs">
-												<span className="text-slate-600">Current: </span>
-												<span className="font-semibold">{currentMeasurements[(clickedMeasurement ?? hoveredMeasurement) as keyof typeof currentMeasurements]}"</span>
-											</div>
-											<div>
-												<label className="block text-xs text-slate-600 mb-1">New Value (inches):</label>
-												<input
-													type="number"
-													value={desiredMeasurements[(clickedMeasurement ?? hoveredMeasurement) as keyof typeof desiredMeasurements]}
-													onChange={(e) => handleDesiredChange((clickedMeasurement ?? hoveredMeasurement)!, e.target.value)}
-													step="0.5"
-													className="w-full p-1.5 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-												/>
+							{(() => {
+								const activeMeasurement = clickedMeasurement ?? hoveredMeasurement;
+								if (!activeMeasurement) return null;
+
+								// Position tooltip above each selector based on SVG coordinates
+								// SVG viewBox: 0 0 586.23 956.54
+								// Label positions: Waist (288, 25), Inseam (30, 587), Leg Opening (115, 949)
+								const positions: Record<string, { left: string; top: string }> = {
+									waist: { left: '49%', top: '2%' }, // Above waist (288/586.23 ≈ 49%, 25/956.54 ≈ 2.6%)
+									inseam: { left: '20%', top: '58%' }, // Above inseam (30/586.23 ≈ 5%, 587/956.54 ≈ 61%)
+									legOpening: { left: '20%', top: '96%' } // Above leg opening (115/586.23 ≈ 20%, 949/956.54 ≈ 99%)
+								};
+								const position = positions[activeMeasurement] || { left: '50%', top: '50%' };
+
+								return (
+									<div ref={selectedRef} onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
+										<div 
+											className="absolute bg-white rounded-lg p-3 shadow-xl z-10 max-w-xs"
+											style={{
+												left: position.left,
+												top: position.top,
+												transform: 'translate(-50%, -100%)',
+												marginTop: '-8px'
+											}}
+										>
+											<h4 className="font-semibold text-slate-700 mb-2 capitalize text-sm">{activeMeasurement}</h4>
+											<div className="space-y-2">
+												<div className="text-xs">
+													<span className="text-slate-600">Current: </span>
+													<span className="font-semibold">{currentMeasurements[activeMeasurement as keyof typeof currentMeasurements]}"</span>
+												</div>
+												<div>
+													<label className="block text-xs text-slate-600 mb-1">New Value (inches):</label>
+													<input
+														type="number"
+														value={desiredMeasurements[activeMeasurement as keyof typeof desiredMeasurements]}
+														onChange={(e) => handleDesiredChange(activeMeasurement, e.target.value)}
+														step="0.5"
+														className="w-full p-1.5 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+													/>
+												</div>
 											</div>
 										</div>
 									</div>
-								)}
-							</div>
+								);
+							})()}
 						</div>
 					</div>
 				</div>
