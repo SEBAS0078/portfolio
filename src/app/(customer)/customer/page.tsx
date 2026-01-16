@@ -7,13 +7,19 @@ export default function PantsAlterationApp() {
 	const [currentMeasurements, setCurrentMeasurements] = useState({
 		waist: 32,
 		inseam: 32,
-		legOpening: 8
+		legOpening: 8,
+		outseam: 34,
+		hip: 36,
+		thigh: 24
 	});
 
 	const [desiredMeasurements, setDesiredMeasurements] = useState({
 		waist: 32,
 		inseam: 32,
-		legOpening: 8
+		legOpening: 8,
+		outseam: 34,
+		hip: 36,
+		thigh: 24
 	});
 
 	const [garmentType, setGarmentType] = useState('jeans');
@@ -74,7 +80,10 @@ export default function PantsAlterationApp() {
 		return {
 			waist: desiredMeasurements.waist - currentMeasurements.waist,
 			inseam: desiredMeasurements.inseam - currentMeasurements.inseam,
-			legOpening: desiredMeasurements.legOpening - currentMeasurements.legOpening
+			legOpening: desiredMeasurements.legOpening - currentMeasurements.legOpening,
+			outseam: desiredMeasurements.outseam - currentMeasurements.outseam,
+			hip: desiredMeasurements.hip - currentMeasurements.hip,
+			thigh: desiredMeasurements.thigh - currentMeasurements.thigh
 		};
 	};
 
@@ -242,10 +251,14 @@ export default function PantsAlterationApp() {
 								// Position tooltip above each selector based on SVG coordinates
 								// SVG viewBox: 0 0 586.23 956.54
 								// Label positions: Waist (288, 25), Inseam (30, 587), Leg Opening (115, 949)
+								// Outseam (532, 457), Hip (311, 244), Thigh (185, 338)
 								const positions: Record<string, { left: string; top: string }> = {
 									waist: { left: '49%', top: '2%' }, // Above waist (288/586.23 ≈ 49%, 25/956.54 ≈ 2.6%)
 									inseam: { left: '20%', top: '58%' }, // Above inseam (30/586.23 ≈ 5%, 587/956.54 ≈ 61%)
-									legOpening: { left: '20%', top: '96%' } // Above leg opening (115/586.23 ≈ 20%, 949/956.54 ≈ 99%)
+									legOpening: { left: '20%', top: '96%' }, // Above leg opening (115/586.23 ≈ 20%, 949/956.54 ≈ 99%)
+									outseam: { left: '75%', top: '45%' }, // Right side outseam (532/586.23 ≈ 91%, 457/956.54 ≈ 48%)
+									hip: { left: '53%', top: '25%' }, // Above hip (311/586.23 ≈ 53%, 244/956.54 ≈ 25%)
+									thigh: { left: '32%', top: '35%' } // Above thigh (185/586.23 ≈ 32%, 338/956.54 ≈ 35%)
 								};
 								const position = positions[activeMeasurement] || { left: '50%', top: '50%' };
 

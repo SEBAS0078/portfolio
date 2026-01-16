@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react';
+import MeasurementLabels from './MeasurementLabels';
 
 interface PantsSVGProps {
 	hoveredMeasurement: string | null;
@@ -9,6 +10,9 @@ interface PantsSVGProps {
 		waist: number;
 		inseam: number;
 		legOpening: number;
+		outseam: number;
+		hip: number;
+		thigh: number;
 	};
 	onHoverChange: (measurement: string | null) => void;
 	onClick: (measurement: string) => void;
@@ -111,89 +115,13 @@ export default function PantsSVG({
 			</g>
 
 			{/* Interactive labels */}
-			{/* Waist label */}
-			<g
-				onMouseEnter={() => {
-					if (!clickedMeasurement) {
-						onHoverChange('waist');
-					}
-				}}
-				onMouseLeave={() => {
-					if (!clickedMeasurement) {
-						onHoverChange(null);
-					}
-				}}
-				onClick={(e) => {
-					e.stopPropagation();
-					onClick('waist');
-				}}
-				style={{ cursor: 'pointer' }}
-			>
-				<circle cx="288" cy="25" r="30" fill={hoveredMeasurement === 'waist' || clickedMeasurement === 'waist' ? '#dbeafe' : 'transparent'} />
-				<text x="288" y="20" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
-					Waist
-				</text>
-				<text x="288" y="32" textAnchor="middle" fontSize="10" fill="#475569">
-					{desiredMeasurements.waist}"
-				</text>
-			</g>
-
-			{/* Inseam label (left side) */}
-			<g
-				onMouseEnter={() => {
-					if (!clickedMeasurement) {
-						onHoverChange('inseam');
-					}
-				}}
-				onMouseLeave={() => {
-					if (!clickedMeasurement) {
-						onHoverChange(null);
-					}
-				}}
-				onClick={(e) => {
-					e.stopPropagation();
-					onClick('inseam');
-				}}
-				style={{ cursor: 'pointer' }}
-			>
-				<circle cx="30" cy="587" r="30" fill={hoveredMeasurement === 'inseam' || clickedMeasurement === 'inseam' ? '#dbeafe' : 'transparent'} />
-				<text x="30" y="584" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
-					Inseam
-				</text>
-				<text x="30" y="595" textAnchor="middle" fontSize="10" fill="#475569">
-					{desiredMeasurements.inseam}"
-				</text>
-			</g>
-
-			{/* Leg Opening label */}
-			<g
-				onMouseEnter={() => {
-					if (!clickedMeasurement) {
-						onHoverChange('legOpening');
-					}
-				}}
-				onMouseLeave={() => {
-					if (!clickedMeasurement) {
-						onHoverChange(null);
-					}
-				}}
-				onClick={(e) => {
-					e.stopPropagation();
-					onClick('legOpening');
-				}}
-				style={{ cursor: 'pointer' }}
-			>
-				<circle cx="115" cy="949" r="30" fill={hoveredMeasurement === 'legOpening' || clickedMeasurement === 'legOpening' ? '#dbeafe' : 'transparent'} />
-				<text x="115" y="944" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
-					Leg
-				</text>
-				<text x="115" y="955" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
-					Opening
-				</text>
-				<text x="115" y="966" textAnchor="middle" fontSize="10" fill="#475569">
-					{desiredMeasurements.legOpening}"
-				</text>
-			</g>
+			<MeasurementLabels
+				hoveredMeasurement={hoveredMeasurement}
+				clickedMeasurement={clickedMeasurement}
+				desiredMeasurements={desiredMeasurements}
+				onHoverChange={onHoverChange}
+				onClick={onClick}
+			/>
 		</svg>
 	);
 }
