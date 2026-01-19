@@ -2,25 +2,13 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import PantsSVG from './vectors/PantsSVG';
+import PantsSVGGray from './vectors/grayPantSvg';
+import { useCurrentMeasurements, useDesiredtMeasurements } from './hooks/useMeasurements';
 
 export default function PantsAlterationApp() {
-	const [currentMeasurements, setCurrentMeasurements] = useState({
-		waist: 32,
-		inseam: 32,
-		legOpening: 8,
-		outseam: 34,
-		hip: 36,
-		thigh: 24
-	});
 
-	const [desiredMeasurements, setDesiredMeasurements] = useState({
-		waist: 32,
-		inseam: 32,
-		legOpening: 8,
-		outseam: 34,
-		hip: 36,
-		thigh: 24
-	});
+	const { currentMeasurements, setCurrentMeasurements } = useCurrentMeasurements();
+	const { desiredMeasurements, setDesiredMeasurements } = useDesiredtMeasurements();
 
 	const [garmentType, setGarmentType] = useState('jeans');
 	const [hoveredMeasurement, setHoveredMeasurement] = useState<string | null>(null);
@@ -236,6 +224,11 @@ export default function PantsAlterationApp() {
 									setClickedMeasurement(measurement);
 									setHoveredMeasurement(null);
 								}}
+							/>
+
+							<PantsSVGGray
+								newMeasurements={desiredMeasurements}
+								currentMeasurements={currentMeasurements}
 							/>
 
 							{/* Hover tooltip */}
