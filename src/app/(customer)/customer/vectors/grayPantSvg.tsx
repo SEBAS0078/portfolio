@@ -22,10 +22,15 @@ export type newMeasurementsProp = {
 export default function PantsSVGGray({ newMeasurements, currentMeasurements }: newMeasurementsProp) {
 	// Calculate scale factors
 	const waistScale = newMeasurements.waist / currentMeasurements.waist;
-	const inseamScale = newMeasurements.inseam / currentMeasurements.inseam;
 	const legOpeningScale = newMeasurements.legOpening / currentMeasurements.legOpening;
-	const outseamScale = newMeasurements.outseam / currentMeasurements.outseam;
+	const inseamChange = newMeasurements.inseam - currentMeasurements.inseam;
+	const outseamChange = newMeasurements.outseam - currentMeasurements.outseam;
 
+	// Inseam and outseam should use the SAME scale factor
+	const legLengthChange = Math.max(Math.abs(inseamChange), Math.abs(outseamChange)) * (inseamChange !== 0 ? Math.sign(inseamChange) : Math.sign(outseamChange));
+
+	// Apply the same length scale to both seams
+	const legLengthScale = (currentMeasurements.inseam + legLengthChange) / currentMeasurements.inseam;
 	// Center points for symmetric scaling
 	const centerX = 288; // Approximate center of pants
 	const waistY = 3.65; // Top of pants
@@ -49,15 +54,15 @@ export default function PantsSVGGray({ newMeasurements, currentMeasurements }: n
 
 	// Outseam coordinates (scaled for outseam length)
 	const leftOuterseamTop = { x: scaleX(111.28, waistScale), y: 3.65 };
-	const leftOuterseamBottom = { x: scaleX(53.92, legOpeningScale), y: scaleY(910.09, outseamScale) };
+	const leftOuterseamBottom = { x: scaleX(53.92, legOpeningScale), y: scaleY(910.09, legLengthScale) };
 	const rightOuterseamTop = { x: scaleX(464.83, waistScale), y: 2.08 };
-	const rightOuterseamBottom = { x: scaleX(522.19, legOpeningScale), y: scaleY(908.52, outseamScale) };
+	const rightOuterseamBottom = { x: scaleX(522.19, legOpeningScale), y: scaleY(908.52, legLengthScale) };
 
 	// Hem coordinates (scaled for leg opening)
-	const leftHemInner = { x: scaleX(202.52, legOpeningScale), y: scaleY(920.18, inseamScale) };
-	const leftHemOuter = { x: scaleX(53.92, legOpeningScale), y: scaleY(910.09, outseamScale) };
-	const rightHemInner = { x: scaleX(373.55, legOpeningScale), y: scaleY(917.9, inseamScale) };
-	const rightHemOuter = { x: scaleX(522.19, legOpeningScale), y: scaleY(908.52, outseamScale) };
+	const leftHemInner = { x: scaleX(202.52, legOpeningScale), y: scaleY(920.18, legLengthScale) };
+	const leftHemOuter = { x: scaleX(53.92, legOpeningScale), y: scaleY(910.09, legLengthScale) };
+	const rightHemInner = { x: scaleX(373.55, legOpeningScale), y: scaleY(917.9, legLengthScale) };
+	const rightHemOuter = { x: scaleX(522.19, legOpeningScale), y: scaleY(908.52, legLengthScale) };
 
 	// Inseam coordinates (scaled for inseam length)
 	const inseamTop = { x: centerX, y: scaleY(281.89, 1) }; // Keep crotch position relative
