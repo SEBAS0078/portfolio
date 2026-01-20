@@ -224,11 +224,13 @@ export default function PantsAlterationApp() {
 									setClickedMeasurement(measurement);
 									setHoveredMeasurement(null);
 								}}
+								className="relative z-10"
 							/>
 
 							<PantsSVGGray
 								newMeasurements={desiredMeasurements}
 								currentMeasurements={currentMeasurements}
+								className="absolute z-0"
 							/>
 
 							{/* Hover tooltip */}

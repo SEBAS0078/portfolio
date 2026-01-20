@@ -16,10 +16,11 @@ export type newMeasurementsProp = {
 		outseam: number;
 		hip: number;
 		thigh: number;
-	}
+	},
+	className?: string;
 }
 
-export default function PantsSVGGray({ newMeasurements, currentMeasurements }: newMeasurementsProp) {
+export default function PantsSVGGray({ newMeasurements, currentMeasurements, className }: newMeasurementsProp) {
 	// Calculate scale factors
 	const waistScale = newMeasurements.waist / currentMeasurements.waist;
 	const legOpeningScale = newMeasurements.legOpening / currentMeasurements.legOpening;
@@ -78,7 +79,7 @@ export default function PantsSVGGray({ newMeasurements, currentMeasurements }: n
 	const rightBeltLoop = { x: scaleX(373.55, waistScale), y: 6.39 };
 
 	return (
-		<svg id="Layer_2_Gray" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 586.23 956.54" className="w-full max-w-sm" style={{ maxHeight: '500px' }}>
+		<svg id="Layer_2_Gray" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 586.23 956.54" className={`w-full max-w-sm ${className || ''}`} style={{ maxHeight: '500px' }}>
 			<defs>
 				<style>
 					{`.gray-cls-1 {
