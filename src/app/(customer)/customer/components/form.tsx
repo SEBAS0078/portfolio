@@ -3,27 +3,36 @@ import React, { useState, useRef, useEffect } from 'react';
 const ComponentName = () => {
     const [garmentType, setGarmentType] = useState('jeans');
     const [alterationType, setAlterationType] = useState('Hemming');
-    const ALTERATION_MEASUREMENTS: Record<string, string[]> = {
-        Hemming: ['Inseam'],
-        Tapering: ['Thigh', 'Knee', 'LegOpening', 'Inseam'],
+    const CURRENT_MEASUREMENTS: Record<string, string[]> = {
+        Hemming: ['Inseam', "Waist"],
+        Tapering: ['Inseam', "Waist", 'Thigh', 'Knee', 'LegOpening'],
     };
 
-    const [currentMeasurements, setCurrentMeasurements] = useState({
-        waist: 32,
-        inseam: 32,
-        legOpening: 8,
-        outseam: 34,
-        hip: 36,
-        thigh: 24
+    const DESIRED_MEASUREMENTS = {
+        Hemming: ['Inseam', "Waist"],
+        Tapering: ['Inseam', "Waist", 'Thigh', 'Knee', 'LegOpening'],
+    };
+
+    const [currentMeasurements, setCurrentMeasurements] = useState<string | any>({
+        Thigh: 24, 
+        Waist: 32,
+        Inseam: 32,
+        LegOpening: 8,
+        Knee: 10, 
+        Outseam: 34,
+        Hip: 36,
     });
-    const [desiredMeasurements, setDesiredMeasurements] = useState({
-        waist: 32,
-        inseam: 32,
-        legOpening: 8,
-        outseam: 34,
-        hip: 36,
-        thigh: 24
+    const [desiredMeasurements, setDesiredMeasurements] = useState<string | any>({
+        Thigh: 24, 
+        Waist: 32,
+        Inseam: 32,
+        LegOpening: 8,
+        Knee: 10, 
+        Outseam: 34,
+        Hip: 36,
     });
+
+    
 
 const renderMeasurementInputs = (
   fields: string[],
@@ -36,6 +45,7 @@ const renderMeasurementInputs = (
       <label className="block text-sm font-medium text-slate-600 mb-1">
         {field.replace(/([A-Z])/g, ' $1')} (inches)
       </label>
+      
       <input
         type="number"
         value={measurements[field] ?? ''}
@@ -46,15 +56,23 @@ const renderMeasurementInputs = (
     </div>
   ));
 
+
+
+  
+
     const handleCurrentChange = (field: any, value: any) => {
-        setCurrentMeasurements(prev => ({
+        setCurrentMeasurements((prev:any) => ({
+            ...prev,
+            [field]: parseFloat(value) || 0
+        }));
+      setDesiredMeasurements((prev:any) => ({
             ...prev,
             [field]: parseFloat(value) || 0
         }));
     };
 
     const handleDesiredChange = (field: any, value: any) => {
-        setDesiredMeasurements(prev => ({
+        setDesiredMeasurements((prev:any) => ({
             ...prev,
             [field]: parseFloat(value) || 0
         }));
@@ -118,31 +136,53 @@ const renderMeasurementInputs = (
         </h3>
         <div className="space-y-3">
           {renderMeasurementInputs(
-            ALTERATION_MEASUREMENTS[alterationType] || [],
+            CURRENT_MEASUREMENTS[alterationType] || [],
             currentMeasurements,
             handleCurrentChange,
             'blue'
           )}
         </div>
       </div>
-
+        
       {/* Divider */}
-      <div className="border-t border-slate-200" />
-
-      {/* Desired Measurements */}
-      <div className="space-y-4">
+      <div />
+      {/* Changes Summary */}
+      <div>
         <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wide">
-          Desired Measurements
+          Desired Change
         </h3>
+        <div className="space-y-1.5 text-xs">
+          { DESIRED_MEASUREMENTS[alterationType as keyof typeof DESIRED_MEASUREMENTS].map((field : any) => {
+            const change = desiredMeasurements[field] - currentMeasurements[field];
+            return (
+              <div className="flex justify-between" key={field}>
+                <span className="text-slate-600">{field ?? ''}</span>
+                <span className={`font-semibold ${
+                  change === 0
+                    ? 'text-slate-500'
+                    : change > 0
+                    ? 'text-green-600'
+                    : 'text-red-600'
+                }`}>
+                  {change === 0 ? 'No change' : `${change > 0 ? '+' : ''}${change.toFixed(1)}"`}
+                </span>
+              </div>
+            );
+          })}
+
+        </div>
+      </div>
+      {/* Desired Measurements
+      <div className="space-y-4">
         <div className="space-y-3">
           {renderMeasurementInputs(
-            ALTERATION_MEASUREMENTS[alterationType] || [],
+            DESIRED_MEASUREMENTS[alterationType] || [],
             desiredMeasurements,
             handleDesiredChange,
             'green'
           )}
         </div>
-      </div>
+      </div> */}
 
     </div>
   </div>

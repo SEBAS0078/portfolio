@@ -80,31 +80,6 @@ export default function PantsAlterationApp() {
 					<div className="bg-white rounded-2xl shadow-lg p-4 overflow-auto" ref={svgContainerRef}>
 						<h2 className="text-xl font-semibold text-slate-800 mb-4">Visual Preview</h2>
 
-						{/* Changes Summary */}
-						<div className="mb-4 p-3 bg-slate-50 rounded-lg">
-							<h3 className="font-semibold text-slate-700 mb-2 text-sm">Changes Required:</h3>
-							<div className="space-y-1.5 text-xs">
-								<div className="flex justify-between">
-									<span className="text-slate-600">Waist:</span>
-									<span className={`font-semibold ${changes.waist === 0 ? 'text-slate-500' : changes.waist > 0 ? 'text-red-600' : 'text-green-600'}`}>
-										{changes.waist === 0 ? 'No change' : `${changes.waist > 0 ? '+' : ''}${changes.waist.toFixed(1)}"`}
-									</span>
-								</div>
-								<div className="flex justify-between">
-									<span className="text-slate-600">Inseam:</span>
-									<span className={`font-semibold ${changes.inseam === 0 ? 'text-slate-500' : changes.inseam > 0 ? 'text-red-600' : 'text-green-600'}`}>
-										{changes.inseam === 0 ? 'No change' : `${changes.inseam > 0 ? '+' : ''}${changes.inseam.toFixed(1)}"`}
-									</span>
-								</div>
-								<div className="flex justify-between">
-									<span className="text-slate-600">Leg Opening:</span>
-									<span className={`font-semibold ${changes.legOpening === 0 ? 'text-slate-500' : changes.legOpening > 0 ? 'text-red-600' : 'text-green-600'}`}>
-										{changes.legOpening === 0 ? 'No change' : `${changes.legOpening > 0 ? '+' : ''}${changes.legOpening.toFixed(1)}"`}
-									</span>
-								</div>
-							</div>
-						</div>
-
 						{/* SVG Visualization */}
 						<div className="flex justify-center items-center relative" ref={svgContainerRef}>
 							<PantsSVG
