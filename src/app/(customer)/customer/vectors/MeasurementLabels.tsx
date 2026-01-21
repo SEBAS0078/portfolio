@@ -52,14 +52,14 @@ function MeasurementLabel({
 			<circle
 				cx={x}
 				cy={y}
-				r="30"
+				r="60"
 				fill={isHovered || isClicked ? '#dbeafe' : 'transparent'}
 			/>
 			<text
 				x={x}
 				y={y + yOffset - 5}
 				textAnchor="middle"
-				fontSize="11"
+				fontSize="20"
 				fill="#1e40af"
 				fontWeight="bold"
 			>
@@ -113,7 +113,7 @@ export default function MeasurementLabels({
 	onClick
 }: MeasurementLabelsProps) {
 	const labels = [
-		{ name: 'waist', displayName: 'Waist', x: 288, y: 25 },
+		{ name: 'waist', displayName: 'Waist', x: 344, y: 27 },
 		{ name: 'inseam', displayName: 'Inseam', x: 30, y: 587 },
 		{ name: 'legOpening', displayName: 'Leg', displayNameLine2: 'Opening', x: 115, y: 949 },
 		{ name: 'outseam', displayName: 'Outseam', x: 532, y: 457 },

@@ -5,6 +5,8 @@ import PantsSVG from './vectors/PantsSVG';
 import PantsSVGGray from './vectors/grayPantSvg';
 import { useCurrentMeasurements, useDesiredtMeasurements } from './hooks/useMeasurements';
 import DesiredForm from "./components/form"
+import MeasurementTooltip from './components/MeasurementToolTip';
+
 export default function PantsAlterationApp() {
 
 	const { currentMeasurements, setCurrentMeasurements } = useCurrentMeasurements();
@@ -112,51 +114,18 @@ export default function PantsAlterationApp() {
 								const activeMeasurement = clickedMeasurement ?? hoveredMeasurement;
 								if (!activeMeasurement) return null;
 
-								// Position tooltip above each selector based on SVG coordinates
-								// SVG viewBox: 0 0 586.23 956.54
-								// Label positions: Waist (288, 25), Inseam (30, 587), Leg Opening (115, 949)
-								// Outseam (532, 457), Hip (311, 244), Thigh (185, 338)
-								const positions: Record<string, { left: string; top: string }> = {
-									waist: { left: '49%', top: '2%' }, // Above waist (288/586.23 ≈ 49%, 25/956.54 ≈ 2.6%)
-									inseam: { left: '20%', top: '58%' }, // Above inseam (30/586.23 ≈ 5%, 587/956.54 ≈ 61%)
-									legOpening: { left: '20%', top: '96%' }, // Above leg opening (115/586.23 ≈ 20%, 949/956.54 ≈ 99%)
-									outseam: { left: '75%', top: '45%' }, // Right side outseam (532/586.23 ≈ 91%, 457/956.54 ≈ 48%)
-									hip: { left: '53%', top: '25%' }, // Above hip (311/586.23 ≈ 53%, 244/956.54 ≈ 25%)
-									thigh: { left: '32%', top: '35%' } // Above thigh (185/586.23 ≈ 32%, 338/956.54 ≈ 35%)
-								};
-								const position = positions[activeMeasurement] || { left: '50%', top: '50%' };
-
 								return (
-									<div ref={selectedRef} onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
-										<div
-											className="absolute bg-white rounded-lg p-3 shadow-xl z-10 max-w-xs"
-											style={{
-												left: position.left,
-												top: position.top,
-												transform: 'translate(-50%, -100%)',
-												marginTop: '-8px'
-											}}
-										>
-											<h4 className="font-semibold text-slate-700 mb-2 capitalize text-sm">{activeMeasurement}</h4>
-											<div className="space-y-2">
-												<div className="text-xs">
-													<span className="text-slate-600">Current: </span>
-													<span className="font-semibold">{currentMeasurements[activeMeasurement as keyof typeof currentMeasurements]}"</span>
-												</div>
-												<div>
-													<label className="block text-xs text-slate-600 mb-1">New Value (inches):</label>
-													<input
-														type="number"
-														value={desiredMeasurements[activeMeasurement as keyof typeof desiredMeasurements]}
-														onChange={(e) => handleDesiredChange(activeMeasurement, e.target.value)}
-														step="0.5"
-														className="w-full p-1.5 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-													/>
-												</div>
-											</div>
-										</div>
+									<div ref={selectedRef}>
+										<MeasurementTooltip
+											measurement={activeMeasurement}
+											currentValue={currentMeasurements[activeMeasurement as keyof typeof currentMeasurements]}
+											desiredValue={desiredMeasurements[activeMeasurement as keyof typeof desiredMeasurements]}
+											onDesiredChange={(value) => handleDesiredChange(activeMeasurement, value)}
+										/>
 									</div>
 								);
+
+
 							})()}
 						</div>
 					</div>
