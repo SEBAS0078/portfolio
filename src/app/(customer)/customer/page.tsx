@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import PantsSVG from './vectors/PantsSVG';
 import PantsSVGGray from './vectors/grayPantSvg';
 import { useCurrentMeasurements, useDesiredtMeasurements } from './hooks/useMeasurements';
-
+import DesiredForm from "./components/form"
 export default function PantsAlterationApp() {
 
 	const { currentMeasurements, setCurrentMeasurements } = useCurrentMeasurements();
@@ -50,13 +50,6 @@ export default function PantsAlterationApp() {
 		};
 	}, [clickedMeasurement]);
 
-	const handleCurrentChange = (field: any, value: any) => {
-		setCurrentMeasurements(prev => ({
-			...prev,
-			[field]: parseFloat(value) || 0
-		}));
-	};
-
 	const handleDesiredChange = (field: any, value: any) => {
 		setDesiredMeasurements(prev => ({
 			...prev,
@@ -82,136 +75,10 @@ export default function PantsAlterationApp() {
 			<div className="w-full h-full">
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
 					{/* Left Panel - Input Form */}
-					<div className='flex justify-center'>
-
-						<div className="bg-white rounded-2xl shadow-lg p-4 overflow-auto w-[400px]">
-
-							<h2 className="text-xl font-semibold text-slate-800 mb-4">Measurements</h2>
-
-							{/* Garment Type Selection */}
-							<div className="mb-4">
-								<label className="block text-sm font-medium text-slate-700 mb-2">Garment Type</label>
-								<select
-									value={garmentType}
-									onChange={(e) => setGarmentType(e.target.value)}
-									className="w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-								>
-									<option value="jeans">Jeans</option>
-									<option value="dress-pants">Dress Pants</option>
-									<option value="chinos">Chinos</option>
-								</select>
-							</div>
-
-							{/* Current Measurements */}
-							<div className="mb-4">
-								<h3 className="text-base font-semibold text-slate-700 mb-3">Current Measurements</h3>
-
-								<div className="space-y-3">
-									<div>
-										<label className="block text-sm font-medium text-slate-600 mb-1">Waist (inches)</label>
-										<input
-											type="number"
-											value={currentMeasurements.waist}
-											onChange={(e) => handleCurrentChange('waist', e.target.value)}
-											step="0.5"
-											className="w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-										/>
-									</div>
-
-									<div>
-										<label className="block text-sm font-medium text-slate-600 mb-1">Inseam (inches)</label>
-										<input
-											type="number"
-											value={currentMeasurements.inseam}
-											onChange={(e) => handleCurrentChange('inseam', e.target.value)}
-											step="0.5"
-											className="w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-										/>
-									</div>
-
-									<div>
-										<label className="block text-sm font-medium text-slate-600 mb-1">Leg Opening (inches)</label>
-										<input
-											type="number"
-											value={currentMeasurements.legOpening}
-											onChange={(e) => handleCurrentChange('legOpening', e.target.value)}
-											step="0.25"
-											className="w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-										/>
-									</div>
-								</div>
-							</div>
-
-							{/* Desired Measurements */}
-							<div className="mb-4">
-								<h3 className="text-base font-semibold text-slate-700 mb-3">Desired Measurements</h3>
-
-								<div className="space-y-3">
-									<div>
-										<label className="block text-sm font-medium text-slate-600 mb-1">Waist (inches)</label>
-										<input
-											type="number"
-											value={desiredMeasurements.waist}
-											onChange={(e) => handleDesiredChange('waist', e.target.value)}
-											step="0.5"
-											className="w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
-										/>
-									</div>
-
-									<div>
-										<label className="block text-sm font-medium text-slate-600 mb-1">Inseam (inches)</label>
-										<input
-											type="number"
-											value={desiredMeasurements.inseam}
-											onChange={(e) => handleDesiredChange('inseam', e.target.value)}
-											step="0.5"
-											className="w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
-										/>
-									</div>
-
-									<div>
-										<label className="block text-sm font-medium text-slate-600 mb-1">Leg Opening (inches)</label>
-										<input
-											type="number"
-											value={desiredMeasurements.legOpening}
-											onChange={(e) => handleDesiredChange('legOpening', e.target.value)}
-											step="0.25"
-											className="w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
-										/>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
+					<DesiredForm/>
 					{/* Right Panel - Visual Representation */}
 					<div className="bg-white rounded-2xl shadow-lg p-4 overflow-auto" ref={svgContainerRef}>
 						<h2 className="text-xl font-semibold text-slate-800 mb-4">Visual Preview</h2>
-
-						{/* Changes Summary */}
-						<div className="mb-4 p-3 bg-slate-50 rounded-lg">
-							<h3 className="font-semibold text-slate-700 mb-2 text-sm">Changes Required:</h3>
-							<div className="space-y-1.5 text-xs">
-								<div className="flex justify-between">
-									<span className="text-slate-600">Waist:</span>
-									<span className={`font-semibold ${changes.waist === 0 ? 'text-slate-500' : changes.waist > 0 ? 'text-red-600' : 'text-green-600'}`}>
-										{changes.waist === 0 ? 'No change' : `${changes.waist > 0 ? '+' : ''}${changes.waist.toFixed(1)}"`}
-									</span>
-								</div>
-								<div className="flex justify-between">
-									<span className="text-slate-600">Inseam:</span>
-									<span className={`font-semibold ${changes.inseam === 0 ? 'text-slate-500' : changes.inseam > 0 ? 'text-red-600' : 'text-green-600'}`}>
-										{changes.inseam === 0 ? 'No change' : `${changes.inseam > 0 ? '+' : ''}${changes.inseam.toFixed(1)}"`}
-									</span>
-								</div>
-								<div className="flex justify-between">
-									<span className="text-slate-600">Leg Opening:</span>
-									<span className={`font-semibold ${changes.legOpening === 0 ? 'text-slate-500' : changes.legOpening > 0 ? 'text-red-600' : 'text-green-600'}`}>
-										{changes.legOpening === 0 ? 'No change' : `${changes.legOpening > 0 ? '+' : ''}${changes.legOpening.toFixed(1)}"`}
-									</span>
-								</div>
-							</div>
-						</div>
 
 						{/* SVG Visualization */}
 						<div className="flex justify-center items-center relative" ref={svgContainerRef}>
