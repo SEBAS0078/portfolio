@@ -163,13 +163,14 @@ const renderMeasurementInputs = (
       </div>
         
       {/* Divider */}
-      <div />
+      <div className="border-t border-slate-200" />
       {/* Changes Summary */}
       <div>
         <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wide">
           Desired Change
         </h3>
-        <div className="space-y-1.5 text-xs">
+        <p className="mb-3  text-sm font-small text-slate-600">Keep in mind that we can only shorter your garment</p>
+        <div className="space-y-1.5 text-s">
           {DESIRED_MEASUREMENTS[alterationType]?.map((field) => {
 	          const change =
 		        desiredMeasurements[field] - currentMeasurements[field];
