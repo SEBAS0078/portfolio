@@ -16,6 +16,7 @@ interface PantsSVGProps {
 	};
 	onHoverChange: (measurement: string | null) => void;
 	onClick: (measurement: string) => void;
+	className?: string;
 }
 
 export default function PantsSVG({
@@ -23,10 +24,11 @@ export default function PantsSVG({
 	clickedMeasurement,
 	desiredMeasurements,
 	onHoverChange,
-	onClick
+	onClick,
+	className
 }: PantsSVGProps) {
 	return (
-		<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 586.23 956.54" className="w-full max-w-sm" style={{ maxHeight: '500px' }}>
+		<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 586.23 956.54" className={`w-full max-w-sm ${className || ''}`} style={{ maxHeight: '500px' }}>
 			<defs>
 				<style>
 					{`.cls-1 {

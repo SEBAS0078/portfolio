@@ -2,6 +2,94 @@
 
 import React from 'react';
 
+interface MeasurementLabelProps {
+	name: string;
+	displayName: string;
+	displayNameLine2?: string;
+	value: number;
+	x: number;
+	y: number;
+	isHovered: boolean;
+	isClicked: boolean;
+	hasClickedMeasurement: boolean;
+	onHoverChange: (measurement: string | null) => void;
+	onClick: (measurement: string) => void;
+}
+
+function MeasurementLabel({
+	name,
+	displayName,
+	displayNameLine2,
+	value,
+	x,
+	y,
+	isHovered,
+	isClicked,
+	hasClickedMeasurement,
+	onHoverChange,
+	onClick
+}: MeasurementLabelProps) {
+	const yOffset = displayNameLine2 ? -3 : 0;
+
+	return (
+		<g
+			onMouseEnter={() => {
+				if (!hasClickedMeasurement) {
+					onHoverChange(name);
+				}
+			}}
+			onMouseLeave={() => {
+				if (!hasClickedMeasurement) {
+					onHoverChange(null);
+				}
+			}}
+			onClick={(e) => {
+				e.stopPropagation();
+				onClick(name);
+			}}
+			style={{ cursor: 'pointer' }}
+		>
+			<circle
+				cx={x}
+				cy={y}
+				r="30"
+				fill={isHovered || isClicked ? '#dbeafe' : 'transparent'}
+			/>
+			<text
+				x={x}
+				y={y + yOffset - 5}
+				textAnchor="middle"
+				fontSize="11"
+				fill="#1e40af"
+				fontWeight="bold"
+			>
+				{displayName}
+			</text>
+			{displayNameLine2 && (
+				<text
+					x={x}
+					y={y + yOffset + 6}
+					textAnchor="middle"
+					fontSize="11"
+					fill="#1e40af"
+					fontWeight="bold"
+				>
+					{displayNameLine2}
+				</text>
+			)}
+			<text
+				x={x}
+				y={y + (displayNameLine2 ? 17 : 7)}
+				textAnchor="middle"
+				fontSize="10"
+				fill="#475569"
+			>
+				{value}"
+			</text>
+		</g>
+	);
+}
+
 interface MeasurementLabelsProps {
 	hoveredMeasurement: string | null;
 	clickedMeasurement: string | null;
@@ -24,172 +112,33 @@ export default function MeasurementLabels({
 	onHoverChange,
 	onClick
 }: MeasurementLabelsProps) {
+	const labels = [
+		{ name: 'waist', displayName: 'Waist', x: 288, y: 25 },
+		{ name: 'inseam', displayName: 'Inseam', x: 30, y: 587 },
+		{ name: 'legOpening', displayName: 'Leg', displayNameLine2: 'Opening', x: 115, y: 949 },
+		{ name: 'outseam', displayName: 'Outseam', x: 532, y: 457 },
+		{ name: 'hip', displayName: 'Hip', x: 311, y: 244 },
+		{ name: 'thigh', displayName: 'Thigh', x: 185, y: 338 }
+	];
+
 	return (
 		<>
-			{/* Waist label */}
-			<g
-				onMouseEnter={() => {
-					if (!clickedMeasurement) {
-						onHoverChange('waist');
-					}
-				}}
-				onMouseLeave={() => {
-					if (!clickedMeasurement) {
-						onHoverChange(null);
-					}
-				}}
-				onClick={(e) => {
-					e.stopPropagation();
-					onClick('waist');
-				}}
-				style={{ cursor: 'pointer' }}
-			>
-				<circle cx="288" cy="25" r="30" fill={hoveredMeasurement === 'waist' || clickedMeasurement === 'waist' ? '#dbeafe' : 'transparent'} />
-				<text x="288" y="20" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
-					Waist
-				</text>
-				<text x="288" y="32" textAnchor="middle" fontSize="10" fill="#475569">
-					{desiredMeasurements.waist}"
-				</text>
-			</g>
-
-			{/* Inseam label (left side) */}
-			<g
-				onMouseEnter={() => {
-					if (!clickedMeasurement) {
-						onHoverChange('inseam');
-					}
-				}}
-				onMouseLeave={() => {
-					if (!clickedMeasurement) {
-						onHoverChange(null);
-					}
-				}}
-				onClick={(e) => {
-					e.stopPropagation();
-					onClick('inseam');
-				}}
-				style={{ cursor: 'pointer' }}
-			>
-				<circle cx="30" cy="587" r="30" fill={hoveredMeasurement === 'inseam' || clickedMeasurement === 'inseam' ? '#dbeafe' : 'transparent'} />
-				<text x="30" y="584" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
-					Inseam
-				</text>
-				<text x="30" y="595" textAnchor="middle" fontSize="10" fill="#475569">
-					{desiredMeasurements.inseam}"
-				</text>
-			</g>
-
-			{/* Leg Opening label */}
-			<g
-				onMouseEnter={() => {
-					if (!clickedMeasurement) {
-						onHoverChange('legOpening');
-					}
-				}}
-				onMouseLeave={() => {
-					if (!clickedMeasurement) {
-						onHoverChange(null);
-					}
-				}}
-				onClick={(e) => {
-					e.stopPropagation();
-					onClick('legOpening');
-				}}
-				style={{ cursor: 'pointer' }}
-			>
-				<circle cx="115" cy="949" r="30" fill={hoveredMeasurement === 'legOpening' || clickedMeasurement === 'legOpening' ? '#dbeafe' : 'transparent'} />
-				<text x="115" y="944" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
-					Leg
-				</text>
-				<text x="115" y="955" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
-					Opening
-				</text>
-				<text x="115" y="966" textAnchor="middle" fontSize="10" fill="#475569">
-					{desiredMeasurements.legOpening}"
-				</text>
-			</g>
-
-			{/* Outseam label (right side) */}
-			<g
-				onMouseEnter={() => {
-					if (!clickedMeasurement) {
-						onHoverChange('outseam');
-					}
-				}}
-				onMouseLeave={() => {
-					if (!clickedMeasurement) {
-						onHoverChange(null);
-					}
-				}}
-				onClick={(e) => {
-					e.stopPropagation();
-					onClick('outseam');
-				}}
-				style={{ cursor: 'pointer' }}
-			>
-				<circle cx="532" cy="457" r="30" fill={hoveredMeasurement === 'outseam' || clickedMeasurement === 'outseam' ? '#dbeafe' : 'transparent'} />
-				<text x="532" y="454" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
-					Outseam
-				</text>
-				<text x="532" y="465" textAnchor="middle" fontSize="10" fill="#475569">
-					{desiredMeasurements.outseam}"
-				</text>
-			</g>
-
-			{/* Hip label */}
-			<g
-				onMouseEnter={() => {
-					if (!clickedMeasurement) {
-						onHoverChange('hip');
-					}
-				}}
-				onMouseLeave={() => {
-					if (!clickedMeasurement) {
-						onHoverChange(null);
-					}
-				}}
-				onClick={(e) => {
-					e.stopPropagation();
-					onClick('hip');
-				}}
-				style={{ cursor: 'pointer' }}
-			>
-				<circle cx="311" cy="244" r="30" fill={hoveredMeasurement === 'hip' || clickedMeasurement === 'hip' ? '#dbeafe' : 'transparent'} />
-				<text x="311" y="241" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
-					Hip
-				</text>
-				<text x="311" y="252" textAnchor="middle" fontSize="10" fill="#475569">
-					{desiredMeasurements.hip}"
-				</text>
-			</g>
-
-			{/* Thigh label */}
-			<g
-				onMouseEnter={() => {
-					if (!clickedMeasurement) {
-						onHoverChange('thigh');
-					}
-				}}
-				onMouseLeave={() => {
-					if (!clickedMeasurement) {
-						onHoverChange(null);
-					}
-				}}
-				onClick={(e) => {
-					e.stopPropagation();
-					onClick('thigh');
-				}}
-				style={{ cursor: 'pointer' }}
-			>
-				<circle cx="185" cy="338" r="30" fill={hoveredMeasurement === 'thigh' || clickedMeasurement === 'thigh' ? '#dbeafe' : 'transparent'} />
-				<text x="185" y="335" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">
-					Thigh
-				</text>
-				<text x="185" y="346" textAnchor="middle" fontSize="10" fill="#475569">
-					{desiredMeasurements.thigh}"
-				</text>
-			</g>
+			{labels.map((label) => (
+				<MeasurementLabel
+					key={label.name}
+					name={label.name}
+					displayName={label.displayName}
+					displayNameLine2={label.displayNameLine2}
+					value={desiredMeasurements[label.name as keyof typeof desiredMeasurements]}
+					x={label.x}
+					y={label.y}
+					isHovered={hoveredMeasurement === label.name}
+					isClicked={clickedMeasurement === label.name}
+					hasClickedMeasurement={!!clickedMeasurement}
+					onHoverChange={onHoverChange}
+					onClick={onClick}
+				/>
+			))}
 		</>
 	);
 }

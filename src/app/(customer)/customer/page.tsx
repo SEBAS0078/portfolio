@@ -2,26 +2,13 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import PantsSVG from './vectors/PantsSVG';
-import DesiredForm from './components/form';
-
+import PantsSVGGray from './vectors/grayPantSvg';
+import { useCurrentMeasurements, useDesiredtMeasurements } from './hooks/useMeasurements';
+import DesiredForm from "./components/form"
 export default function PantsAlterationApp() {
-	const [currentMeasurements, setCurrentMeasurements] = useState({
-		waist: 32,
-		inseam: 32,
-		legOpening: 8,
-		outseam: 34,
-		hip: 36,
-		thigh: 24
-	});
 
-	const [desiredMeasurements, setDesiredMeasurements] = useState({
-		waist: 32,
-		inseam: 32,
-		legOpening: 8,
-		outseam: 34,
-		hip: 36,
-		thigh: 24
-	});
+	const { currentMeasurements, setCurrentMeasurements } = useCurrentMeasurements();
+	const { desiredMeasurements, setDesiredMeasurements } = useDesiredtMeasurements();
 
 	const [garmentType, setGarmentType] = useState('jeans');
 	const [hoveredMeasurement, setHoveredMeasurement] = useState<string | null>(null);
@@ -36,7 +23,7 @@ export default function PantsAlterationApp() {
 			if (selectedRef.current && selectedRef.current.contains(event.target as Node)) {
 				return;
 			}
-			
+
 			// Check if clicking on an interactive SVG label (g element with cursor pointer style)
 			const target = event.target as HTMLElement;
 			const gElement = target.closest('g');
@@ -46,7 +33,7 @@ export default function PantsAlterationApp() {
 					return; // Don't close if clicking on a label
 				}
 			}
-			
+
 			// Close the tooltip if clicking anywhere else (including SVG background, other parts of the page, etc.)
 			if (clickedMeasurement) {
 				setClickedMeasurement(null);
@@ -84,13 +71,8 @@ export default function PantsAlterationApp() {
 	const changes = calculateChanges();
 
 	return (
-		<div className="h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-4 overflow-auto">
+		<div className="h-screen p-4 overflow-auto">
 			<div className="w-full h-full">
-				<div className="text-center mb-4">
-					<h1 className="text-3xl font-bold text-slate-800 mb-1"> Hemly </h1>
-					<p className="text-slate-600 text-sm">Visualize and specify your alterations</p>
-				</div>
-
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
 					{/* Left Panel - Input Form */}
 					<DesiredForm/>
@@ -134,6 +116,13 @@ export default function PantsAlterationApp() {
 									setClickedMeasurement(measurement);
 									setHoveredMeasurement(null);
 								}}
+								className="relative z-10"
+							/>
+
+							<PantsSVGGray
+								newMeasurements={desiredMeasurements}
+								currentMeasurements={currentMeasurements}
+								className="absolute z-0"
 							/>
 
 							{/* Hover tooltip */}
@@ -157,7 +146,7 @@ export default function PantsAlterationApp() {
 
 								return (
 									<div ref={selectedRef} onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
-										<div 
+										<div
 											className="absolute bg-white rounded-lg p-3 shadow-xl z-10 max-w-xs"
 											style={{
 												left: position.left,
