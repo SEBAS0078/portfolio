@@ -75,7 +75,14 @@ export default function PantsAlterationApp() {
 			<div className="w-full h-full">
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
 					{/* Left Panel - Input Form */}
-					<DesiredForm/>
+					<DesiredForm 
+						desiredMeasurements = {desiredMeasurements}
+						currentMeasurements = {currentMeasurements}
+						setDesiredMeasurements = {setDesiredMeasurements}
+						setCurrentMeasurements = {setCurrentMeasurements}
+						garmentType = {garmentType}
+						setGarmentType =  {setGarmentType}
+						/>
 					{/* Right Panel - Visual Representation */}
 					<div className="bg-white rounded-2xl shadow-lg p-4 overflow-auto" ref={svgContainerRef}>
 						<h2 className="text-xl font-semibold text-slate-800 mb-4">Visual Preview</h2>

@@ -1,83 +1,101 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const ComponentName = () => {
-    const [garmentType, setGarmentType] = useState('jeans');
-    const [alterationType, setAlterationType] = useState('Hemming');
-    const CURRENT_MEASUREMENTS: Record<string, string[]> = {
-        Hemming: ['Inseam', "Waist"],
-        Tapering: ['Inseam', "Waist", 'Thigh', 'Knee', 'LegOpening'],
-    };
+export type Measurements = {
+	waist: number;
+	inseam: number;
+	legOpening: number;
+	outseam: number;
+	hip: number;
+	thigh: number;
+};
 
-    const DESIRED_MEASUREMENTS = {
-        Hemming: ['Inseam', "Waist"],
-        Tapering: ['Inseam', "Waist", 'Thigh', 'Knee', 'LegOpening'],
-    };
+export type NewMeasurementsProps = {
+	currentMeasurements: Measurements;
+	desiredMeasurements: Measurements;
 
-    const [currentMeasurements, setCurrentMeasurements] = useState<string | any>({
-        Thigh: 24, 
-        Waist: 32,
-        Inseam: 32,
-        LegOpening: 8,
-        Knee: 10, 
-        Outseam: 34,
-        Hip: 36,
-    });
-    const [desiredMeasurements, setDesiredMeasurements] = useState<string | any>({
-        Thigh: 24, 
-        Waist: 32,
-        Inseam: 32,
-        LegOpening: 8,
-        Knee: 10, 
-        Outseam: 34,
-        Hip: 36,
-    });
+	setCurrentMeasurements: React.Dispatch<
+		React.SetStateAction<Measurements>
+	>;
+	setDesiredMeasurements: React.Dispatch<
+		React.SetStateAction<Measurements>
+	>;
 
-    
+  setGarmentType: React.Dispatch<
+		React.SetStateAction<string>
+	>;
+
+	garmentType: string;
+	className?: string;
+};
+
+type MeasurementKey = keyof Measurements;
+  
+const DesiredFrom = ({ desiredMeasurements, 
+  currentMeasurements, 
+  setDesiredMeasurements, 
+  setCurrentMeasurements, 
+  garmentType,
+  setGarmentType, 
+  className
+ }: NewMeasurementsProps) => {
+
+  const [alterationType, setAlterationType] = useState('Hemming');
+  const CURRENT_MEASUREMENTS: Record<
+  string,
+  MeasurementKey[]
+  > = {
+    Hemming: ['inseam', 'waist'],
+    Tapering: ['inseam', 'waist', 'thigh', 'legOpening'],
+  };
+
+  const DESIRED_MEASUREMENTS: Record<
+    string,
+    MeasurementKey[]
+  > = {
+    Hemming: ['inseam', 'waist'],
+    Tapering: ['inseam', 'waist', 'thigh', 'legOpening'],
+  };
 
 const renderMeasurementInputs = (
-  fields: string[],
-  measurements: any,
-  onChange: (field: string, value: any) => void,
-  focusColor: string
+	fields: MeasurementKey[],
+	measurements: Measurements,
+	onChange: (field: MeasurementKey, value: string) => void,
+	focusColor: string
 ) =>
-  fields.map((field) => (
-    <div key={field}>
-      <label className="block text-sm font-medium text-slate-600 mb-1">
-        {field.replace(/([A-Z])/g, ' $1')} (inches)
-      </label>
-      
-      <input
-        type="number"
-        value={measurements[field] ?? ''}
-        onChange={(e) => onChange(field, e.target.value)}
-        step="0.25"
-        className={`w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-${focusColor}-500 focus:border-transparent text-sm`}
-      />
-    </div>
-  ));
+	fields.map(field => (
+		<div key={field}>
+			<label className="block text-sm font-medium text-slate-600 mb-1">
+				{field.replace(/([A-Z])/g, ' $1')} (inches)
+			</label>
+
+			<input
+				type="number"
+				value={measurements[field]}
+				onChange={e => onChange(field, e.target.value)}
+				step="0.25"
+				className={`w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-${focusColor}-500`}
+			/>
+		</div>
+	));
 
 
 
-  
+    const handleCurrentChange = (
+      field: MeasurementKey,
+      value: string
+    ) => {
+      const num = parseFloat(value) || 0;
 
-    const handleCurrentChange = (field: any, value: any) => {
-        setCurrentMeasurements((prev:any) => ({
-            ...prev,
-            [field]: parseFloat(value) || 0
-        }));
-      setDesiredMeasurements((prev:any) => ({
-            ...prev,
-            [field]: parseFloat(value) || 0
-        }));
+      setCurrentMeasurements(prev => ({
+        ...prev,
+        [field]: num,
+      }));
+
+      setDesiredMeasurements(prev => ({
+        ...prev,
+        [field]: num,
+      }));
     };
-
-    const handleDesiredChange = (field: any, value: any) => {
-        setDesiredMeasurements((prev:any) => ({
-            ...prev,
-            [field]: parseFloat(value) || 0
-        }));
-    };
-
     
   return (
   <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
@@ -152,41 +170,36 @@ const renderMeasurementInputs = (
           Desired Change
         </h3>
         <div className="space-y-1.5 text-xs">
-          { DESIRED_MEASUREMENTS[alterationType as keyof typeof DESIRED_MEASUREMENTS].map((field : any) => {
-            const change = desiredMeasurements[field] - currentMeasurements[field];
+          {DESIRED_MEASUREMENTS[alterationType]?.map((field) => {
+	          const change =
+		        desiredMeasurements[field] - currentMeasurements[field];
+
             return (
               <div className="flex justify-between" key={field}>
-                <span className="text-slate-600">{field ?? ''}</span>
-                <span className={`font-semibold ${
-                  change === 0
-                    ? 'text-slate-500'
-                    : change > 0
-                    ? 'text-green-600'
-                    : 'text-red-600'
-                }`}>
-                  {change === 0 ? 'No change' : `${change > 0 ? '+' : ''}${change.toFixed(1)}"`}
+                <span className="text-slate-600">
+                  {field.replace(/([A-Z])/g, ' $1')}
+                </span>
+                <span
+                  className={`font-semibold ${
+                    change === 0
+                      ? 'text-slate-500'
+                      : change > 0
+                      ? 'text-red-600'
+                      : 'text-green-600'
+                  }`}
+                >
+                  {change === 0
+                    ? 'No change'
+                    : `${change > 0 ? '+' : ''}${change.toFixed(1)}"`}
                 </span>
               </div>
             );
           })}
-
         </div>
       </div>
-      {/* Desired Measurements
-      <div className="space-y-4">
-        <div className="space-y-3">
-          {renderMeasurementInputs(
-            DESIRED_MEASUREMENTS[alterationType] || [],
-            desiredMeasurements,
-            handleDesiredChange,
-            'green'
-          )}
-        </div>
-      </div> */}
-
     </div>
   </div>
 );
 };
 
-export default ComponentName;
+export default DesiredFrom; 
