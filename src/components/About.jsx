@@ -20,7 +20,7 @@ const About = () => {
             </p>
             <p>
               My work includes building end-to-end systems like <strong>MiddLaundry Live</strong>,
-              where I designed vibration detection algorithms, integrated ESP32 sensors with MQTT,
+              where I designed vibration detection algorithms, integrated an Arduino board with an accelerometer and MQTT,
               and developed a React dashboard, and <strong>MiddBin</strong>, a full-stack Next.js
               marketplace for Middlebury students.
             </p>
@@ -37,7 +37,7 @@ const About = () => {
             <div className="flex flex-wrap gap-2">
               {[
                 "React", "Next.js", "TailwindCSS", "Python", "PyTorch", "Java", "C/C++", "R",
-                "HTML", "CSS", "JavaScript", "MQTT", "Node.js", "Express", "MongoDB", "PostgreSQL"
+                "HTML", "CSS", "JavaScript", "MQTT", "Node.js"
               ].map((skill, idx) => (
                 <span
                   key={idx}

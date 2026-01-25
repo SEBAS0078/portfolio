@@ -5,8 +5,8 @@ const projects = [
   {
     title: "MiddLaundry Live",
     description:
-      "Embedded systems + web project showing real-time laundry machine availability using ESP32 sensors, MQTT, and a React dashboard.",
-    tech: ["React", "MQTT", "ESP32", "C"],
+      "Embedded systems + web project showing real-time laundry machine availability using and arduino board,  sensors, MQTT, and a React dashboard.",
+    tech: ["React", "MQTT", "Arduino", "C/C++"],
     image: "/images/middlaundry.png",
     demo: "https://middbin.netlify.app",
     github: "https://github.com/SEBAS0078/MiddLaundryLive",
@@ -15,7 +15,7 @@ const projects = [
     title: "MiddBin",
     description:
       "Full-stack marketplace platform built with Next.js and Supabase for Middlebury students to buy/sell items conveniently.",
-    tech: ["Next.js", "Supabase", "React", "Javascript", "Xss"],
+    tech: ["Next.js", "Supabase", "React", "Javascript"],
     image: "/images/middbin.jpeg",
     demo: "https://middlaundrylive.netlify.app",
     github: "https://github.com/SEBAS0078/MiddBin",
@@ -28,7 +28,15 @@ const projects = [
     image: "/images/npsvdeep.jpg",
     demo: "#",
     github: "#",
-  },
+  },{
+  title: "Text Mining & Analysis Website",
+  description:
+    "Interactive web tool for exploring and visualizing text data. Users can analyze sentiment, word frequencies, bigrams, and TF-IDF across one or multiple documents, with clear explanations to make text mining accessible.",
+  tech: ["R", "R-Shiny App", "Text Mining", "NLP", "Data Visualization"],
+  image: "/images/text-mining.png",
+  demo: "https://sebastiancruz.shinyapps.io/TextAnalyserApp/", // replace with live site URL
+  github: "#", // replace if repo is public
+},
 ];
 
 const Projects = () => {
@@ -89,7 +97,7 @@ const Projects = () => {
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded-lg text-sm font-medium transition-colors"
+                      className="bg-green-500 hover:bg-green-400 text-white px-4 py-2 rounded-lg text-sm font-semibold  shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all"
                     >
                       Live Demo
                     </a>
@@ -99,7 +107,7 @@ const Projects = () => {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="border border-white/30 text-white px-3 py-1 rounded-lg text-sm font-medium hover:bg-white/10 transition-colors"
+                      className="bg-white/20 hover:bg-white/30 border border-white/30 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-white/10  shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all"
                     >
                       GitHub
                     </a>

@@ -27,7 +27,7 @@ const Hero = () => {
           </div>
         </div>
         <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
-          Computer Science Student | Embedded Systems, Web Development & Machine Learning
+          Computer Science Student | Web Development, Machine Learning & Embedded Systems
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center gap-4">
