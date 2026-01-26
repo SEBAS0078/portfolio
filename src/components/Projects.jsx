@@ -29,9 +29,9 @@ const projects = [
     demo: "#",
     github: "#",
   },{
-  title: "Text Mining & Analysis Website",
+  title: "Text Analysis Website",
   description:
-    "Interactive web tool for exploring and visualizing text data. Users can analyze sentiment, word frequencies, bigrams, and TF-IDF across one or multiple documents, with clear explanations to make text mining accessible.",
+    "Interactive web tool for exploring and visualizing text data. Analyze sentiment, word frequencies, bigrams, and TF-IDF across one or multiple documents, with clear explanations to make text mining accessible.",
   tech: ["R", "R-Shiny App", "Text Mining", "NLP", "Data Visualization"],
   image: "/images/text-mining.png",
   demo: "https://sebastiancruz.shinyapps.io/TextAnalyserApp/", // replace with live site URL
@@ -55,7 +55,7 @@ const Projects = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {projects.map((project, idx) => (
             <div
               key={idx}
