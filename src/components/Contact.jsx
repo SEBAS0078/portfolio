@@ -25,7 +25,7 @@ const Contact = () => {
           </h2>
           <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto rounded-full"></div>
           <p className="text-gray-300 mt-4 max-w-2xl mx-auto">
-            Have a question or want to work together? Reach out on social media.
+            Have a question or want to work together? Reach out. 
           </p>
         </div>
 
@@ -35,9 +35,9 @@ const Contact = () => {
           {/* Social Links */}
           <div className="bg-gray-800 p-6 rounded-2xl shadow-lg text-center">
             <h3 className="text-2xl font-semibold mb-4 text-gradient">Connect With Me</h3>
-            <p className="text-gray-300 mb-6">
+            {/* <p className="text-gray-300 mb-6">
               Feel free to reach out through any of these platforms.
-            </p>
+            </p> */}
 
             <div className="flex flex-col gap-3 items-center">
               {/* Social Link */}
@@ -58,7 +58,7 @@ const Contact = () => {
               </a>
 
               <a
-                href="https://www.linkedin.com/in/sebastiancruz/"
+                href="https://www.linkedin.com/in/sebastian-cruz-549b82285/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 hover:text-blue-500 transition-colors"

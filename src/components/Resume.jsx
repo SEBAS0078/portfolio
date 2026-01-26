@@ -10,9 +10,6 @@ const Resume = () => {
             Resume
           </h2>
           <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto rounded-full"></div>
-          <p className="text-gray-300 mt-4 max-w-2xl mx-auto">
-            Download my full resume to see my education, experience, and technical projects in detail.
-          </p>
         </div>
 
         {/* Download Button */}
