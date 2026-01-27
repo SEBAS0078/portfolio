@@ -1,4 +1,7 @@
+"use client"
 import React from "react";
+import ShinyText from './ShinyText';
+
 
 const Hero = () => {
   return (
@@ -14,9 +17,19 @@ const Hero = () => {
 
       {/* Main content */}
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
-          Sebastian Cruz
-        </h1>
+        <ShinyText
+         className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight"
+          text="Sebastian Cruz"
+          speed={3}
+          delay={0}
+          color="#b8b8b8"
+          shineColor="#ffffff"
+          spread={15}
+          direction="left"
+          yoyo={false}
+          pauseOnHover={false}
+          disabled={false}
+        />
         <div className="flex justify-center mb-8">
           <div className="w-48 h-48 rounded-full overflow-hidden">
             <img
