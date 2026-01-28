@@ -27,7 +27,7 @@ const projects = [
     tech: ["Python", "PyTorch", "PyTorch Lightning", "TensorBoard"],
     image: "/images/npsvdeep.jpg",
     demo: "#",
-    github: "#",
+    github: "https://github.com/mlinderm/npsv3",
   },{
   title: "Text Analysis Website",
   description:
