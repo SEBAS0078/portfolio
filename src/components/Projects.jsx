@@ -8,7 +8,7 @@ const projects = [
       "Embedded systems + web project showing real-time laundry machine availability using and arduino board,  sensors, MQTT, and a React dashboard.",
     tech: ["React", "MQTT", "Arduino", "C/C++"],
     image: "/images/middlaundry.png",
-    demo: "https://middbin.netlify.app",
+    demo: "https://middlaundrylive.netlify.app",
     github: "https://github.com/SEBAS0078/MiddLaundryLive",
   },
   {
@@ -17,7 +17,7 @@ const projects = [
       "Full-stack marketplace platform built with Next.js and Supabase for Middlebury students to buy/sell items conveniently.",
     tech: ["Next.js", "Supabase", "React", "Javascript"],
     image: "/images/middbin.jpeg",
-    demo: "https://middlaundrylive.netlify.app",
+    demo: "https://middbin.netlify.app",
     github: "https://github.com/SEBAS0078/MiddBin",
   },
   {
