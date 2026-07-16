@@ -146,6 +146,26 @@
 }
 
 @layer utilities {
+  .section-padding {
+    @apply py-20 md:py-28;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-blue-400 via-sky-300 to-purple-400 bg-clip-text text-transparent;
+  }
+
+  .glass-card {
+    @apply rounded-2xl border border-white/10 bg-white/[0.04] shadow-xl shadow-black/20 backdrop-blur-sm;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+
   .animated-underline {
     background-image: linear-gradient(#33333300, #33333300),
       linear-gradient(
@@ -178,5 +198,11 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }

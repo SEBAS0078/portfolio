@@ -1,5 +1,7 @@
 "use client";
 import React from "react";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import FadeIn from "./FadeIn";
 
 const projects = [
   {
@@ -41,49 +43,50 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="section-padding bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="section-padding bg-gray-950 text-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-gradient mb-2">
+        <FadeIn className="mb-12 text-center">
+          <h2 className="mb-2 text-3xl font-bold text-gradient md:text-4xl">
             Featured Projects
           </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto rounded-full"></div>
-          <p className="text-gray-300 mt-4 max-w-2xl mx-auto">
-            Here are some of my recent projects. 
+          <div className="mx-auto h-1 w-16 rounded-full bg-gradient-to-r from-blue-400 to-purple-500" />
+          <p className="mx-auto mt-4 max-w-2xl text-gray-300">
+            Here are some of my recent projects.
           </p>
-        </div>
+        </FadeIn>
 
         {/* Projects Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {projects.map((project, idx) => (
-            <div
-              key={idx}
-              className="bg-gray-800 rounded-2xl shadow-lg overflow-hidden group hover:scale-105 transform transition duration-300"
+            <FadeIn
+              key={project.title}
+              delay={idx * 0.1}
+              className="glass-card group flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-400/30 hover:shadow-2xl hover:shadow-blue-500/10"
             >
               {/* Project Image */}
-              <div className="relative overflow-hidden h-48">
+              <div className="relative h-48 overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 via-transparent to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-90" />
               </div>
 
               {/* Project Content */}
-              <div className="p-5">
-                <h3 className="text-xl font-semibold mb-2 text-gradient group-hover:text-blue-400 transition-colors">
+              <div className="flex flex-1 flex-col p-5">
+                <h3 className="mb-2 text-xl font-semibold text-gradient transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-gray-300 text-sm mb-3">{project.description}</p>
+                <p className="mb-3 flex-1 text-sm text-gray-300">{project.description}</p>
 
                 {/* Tech Tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((tech, tIdx) => (
+                <div className="mb-4 flex flex-wrap gap-2">
+                  {project.tech.map((tech) => (
                     <span
-                      key={tIdx}
-                      className="bg-blue-600 text-white text-xs px-2 py-1 rounded-full"
+                      key={tech}
+                      className="rounded-full border border-blue-400/20 bg-blue-500/10 px-2 py-1 text-xs text-blue-200"
                     >
                       {tech}
                     </span>
@@ -97,8 +100,9 @@ const Projects = () => {
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-green-500 hover:bg-green-400 text-white px-4 py-2 rounded-lg text-sm font-semibold  shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                      className="flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/30"
                     >
+                      <FaExternalLinkAlt className="h-3 w-3" />
                       Live Demo
                     </a>
                   )}
@@ -107,14 +111,15 @@ const Projects = () => {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-white/20 hover:bg-white/30 border border-white/30 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-white/10  shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                      className="flex items-center gap-1.5 rounded-lg border border-white/20 bg-white/5 px-4 py-2 text-sm font-semibold text-white shadow-md transition-all hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10 hover:shadow-lg"
                     >
+                      <FaGithub className="h-3.5 w-3.5" />
                       GitHub
                     </a>
                   )}
                 </div>
               </div>
-            </div>
+            </FadeIn>
           ))}
         </div>
       </div>

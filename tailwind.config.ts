@@ -84,11 +84,22 @@ export default {
   				'100%': {
   					backgroundPosition: '700px 0'
   				}
+  			},
+  			blob: {
+  				'0%, 100%': { transform: 'translate(0px, 0px) scale(1)' },
+  				'33%': { transform: 'translate(30px, -40px) scale(1.15)' },
+  				'66%': { transform: 'translate(-20px, 20px) scale(0.9)' }
+  			},
+  			float: {
+  				'0%, 100%': { transform: 'translateY(0)' },
+  				'50%': { transform: 'translateY(-8px)' }
   			}
   		},
   		animation: {
   			flicker: 'flicker 3s linear infinite',
-  			shimmer: 'shimmer 1.3s linear infinite'
+  			shimmer: 'shimmer 1.3s linear infinite',
+  			blob: 'blob 9s infinite ease-in-out',
+  			float: 'float 3s ease-in-out infinite'
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

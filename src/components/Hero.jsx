@@ -1,68 +1,107 @@
-"use client"
+"use client";
 import React from "react";
-import ShinyText from './ShinyText';
+import { motion } from "motion/react";
+import ShinyText from "./ShinyText";
 
+const EASE = [0.21, 0.47, 0.32, 0.98];
+
+const container = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
+};
 
 const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden flex items-center justify-center"
+      className="relative flex h-screen items-center justify-center overflow-hidden bg-gray-950"
     >
-      {/* Overlay + subtle background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-72 h-72 bg-blue-600/20 rounded-full blur-3xl animate-blob"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+      {/* Background: mesh gradient + dot grid + blobs */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.16),transparent_45%),radial-gradient(circle_at_80%_75%,rgba(168,85,247,0.16),transparent_45%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[length:28px_28px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_40%,black,transparent)]" />
+        <div className="absolute left-0 top-0 h-72 w-72 animate-blob rounded-full bg-blue-600/20 blur-3xl" />
+        <div className="animation-delay-2000 absolute bottom-0 right-0 h-96 w-96 animate-blob rounded-full bg-purple-600/20 blur-3xl" />
+        <div className="animation-delay-4000 absolute left-1/2 top-1/3 h-64 w-64 -translate-x-1/2 animate-blob rounded-full bg-sky-500/10 blur-3xl" />
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8">
-        <ShinyText
-         className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight"
-          text="Sebastian Cruz"
-          speed={3}
-          delay={0}
-          color="#b8b8b8"
-          shineColor="#ffffff"
-          spread={15}
-          direction="left"
-          yoyo={false}
-          pauseOnHover={false}
-          disabled={false}
-        />
-        <div className="flex justify-center mb-8">
-          <div className="w-48 h-48 rounded-full overflow-hidden">
-            <img
-              src="/images/cbas2.jpeg"
-              alt="profile picture"
-              className="w-full h-full object-cover object-center transform transition-transform duration-300 hover:scale-110"
-            />
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="relative z-10 px-4 text-center sm:px-6 lg:px-8"
+      >
+        <motion.div variants={item} className="mb-8 flex justify-center">
+          <div className="animate-float rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-sky-400 p-1 shadow-2xl shadow-blue-500/20">
+            <div className="h-40 w-40 overflow-hidden rounded-full ring-4 ring-gray-950 sm:h-48 sm:w-48">
+              <img
+                src="/images/cbas2.jpeg"
+                alt="profile picture"
+                className="h-full w-full transform object-cover object-center transition-transform duration-500 hover:scale-110"
+              />
+            </div>
           </div>
-        </div>
-        <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
-          Computer Science Student | Web Development, Machine Learning & Embedded Systems
-        </p>
+        </motion.div>
 
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
+        <motion.div variants={item}>
+          <ShinyText
+            className="mb-4 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl"
+            text="Sebastian Cruz"
+            speed={3}
+            delay={0}
+            color="#b8b8b8"
+            shineColor="#ffffff"
+            spread={15}
+            direction="left"
+            yoyo={false}
+            pauseOnHover={false}
+            disabled={false}
+          />
+        </motion.div>
+
+        <motion.p
+          variants={item}
+          className="mx-auto mb-8 max-w-2xl text-lg text-gray-300 sm:text-xl md:text-2xl"
+        >
+          Computer Science Student | Backend, Full-Stack & AI/ML Software Developer
+        </motion.p>
+
+        <motion.div
+          variants={item}
+          className="flex flex-col justify-center gap-4 sm:flex-row"
+        >
           <a
             href="#projects"
-            className="px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-700 transition-colors text-white font-semibold shadow-lg"
+            className="rounded-full bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-blue-600/30 transition-all hover:-translate-y-0.5 hover:bg-blue-500 hover:shadow-xl hover:shadow-blue-500/40 active:translate-y-0"
           >
             View My Work
           </a>
           <a
             href="#contact"
-            className="px-6 py-3 rounded-full border border-white/30 hover:bg-white/10 transition-colors text-white font-semibold shadow-lg"
+            className="rounded-full border border-white/20 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10 active:translate-y-0"
           >
             Get In Touch
           </a>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.6 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce"
+      >
         <svg
-          className="w-6 h-6 text-white/70"
+          className="h-6 w-6 text-white/60"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -74,7 +113,7 @@ const Hero = () => {
             d="M19 14l-7 7m0 0l-7-7m7 7V3"
           />
         </svg>
-      </div>
+      </motion.div>
     </section>
   );
 };
