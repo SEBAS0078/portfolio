@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "motion/react";
+import { Link } from "react-scroll";
 import { HiOutlineDownload } from "react-icons/hi";
 import ShinyText from "./ShinyText";
 
@@ -80,25 +81,41 @@ const Hero = () => {
           className="flex flex-col justify-center gap-4 sm:flex-row"
         >
           <a
-            href="#projects"
-            className="rounded-full bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-blue-600/30 transition-all hover:-translate-y-0.5 hover:bg-blue-500 hover:shadow-xl hover:shadow-blue-500/40 active:translate-y-0"
-          >
-            View My Work
-          </a>
-          <a
-            href="#contact"
-            className="rounded-full border border-white/20 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10 active:translate-y-0"
-          >
-            Get In Touch
-          </a>
-          <a
             href="/resume.pdf"
-            download
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10 active:translate-y-0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-blue-600/30 transition-all hover:-translate-y-0.5 hover:bg-blue-500 hover:shadow-xl hover:shadow-blue-500/40 active:translate-y-0"
           >
             <HiOutlineDownload className="h-5 w-5" />
-            Download Resume
+            Resume
           </a>
+          <Link
+            to="experience"
+            smooth
+            duration={500}
+            offset={-64}
+            className="cursor-pointer rounded-full border border-white/20 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10 active:translate-y-0"
+          >
+            View My Work
+          </Link>
+          <Link
+            to="projects"
+            smooth
+            duration={500}
+            offset={-64}
+            className="cursor-pointer rounded-full border border-white/20 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10 active:translate-y-0"
+          >
+            Projects
+          </Link>
+          <Link
+            to="contact"
+            smooth
+            duration={500}
+            offset={-64}
+            className="cursor-pointer rounded-full border border-white/20 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10 active:translate-y-0"
+          >
+            Get In Touch
+          </Link>
         </motion.div>
       </motion.div>
 
