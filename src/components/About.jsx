@@ -5,7 +5,7 @@ import FadeIn from "./FadeIn";
 const skills = [
   "Python", "FastAPI", "Pydantic", "PostgreSQL", "React", "Next.js", "TypeScript",
   "TailwindCSS", "JavaScript", "PyTorch", "Java", "C/C++", "R", "HTML", "CSS",
-  "MQTT", "Node.js"
+  "Supabase", "Git/GitHub", "RESTful APIs", "Agile/Scrum", "MQTT", "Node.js"
 ];
 
 const languages = [
@@ -27,16 +27,19 @@ const About = () => {
           <FadeIn delay={0.1} className="space-y-4 text-base text-gray-300">
             <p>
               Hi! I'm <strong className="text-white">Sebastian Cruz</strong>, a Computer Science student at Middlebury College
-              and AI Lead & Backend Developer at <strong className="text-white">Altheros Capital</strong>, where I lead a
-              backend AI team and build Retrieval-Augmented Generation (RAG) infrastructure. I'm passionate about solving
-              real-world problems with code, from backend systems and AI/ML pipelines to full-stack web apps and embedded systems.
+              (College Scholar's List, QuestBridge Scholar) and AI Lead & Backend Developer at{" "}
+              <strong className="text-white">Altheros Capital</strong>, where I lead a backend AI team and design
+              Retrieval-Augmented Generation (RAG) infrastructure. I'm passionate about solving real-world problems with
+              code, from backend systems and AI/ML pipelines to full-stack web apps.
             </p>
             <p>
-              My work includes designing production AI services in Python and Pydantic at Altheros Capital, building
-              AI agent workflows and CRM integrations at <strong className="text-white">Text Maddie</strong>, and end-to-end
-              systems like <strong className="text-white">MiddLaundry Live</strong>, where I designed vibration detection
-              algorithms, integrated an Arduino board with an accelerometer and MQTT, and developed a React dashboard, and
-              <strong className="text-white"> MiddBin</strong>, a full-stack Next.js marketplace for Middlebury students.
+              My work includes building RAG document ingestion pipelines and RESTful AI services in Python and Pydantic at
+              Altheros Capital, developing backend workflows and CRM integrations for AI lead-conversion agents at{" "}
+              <strong className="text-white">Text Maddie</strong>, and implementing loss functions for deep neural
+              networks in PyTorch as a Research Assistant on <strong className="text-white">NPSV-deep</strong>, a
+              structural variant genotyping project at Middlebury. I also co-built{" "}
+              <strong className="text-white">MiddBin</strong>, a full-stack marketplace for Middlebury students built with
+              Next.js, React, TypeScript, Java, and Supabase, serving as Scrum Master.
             </p>
             <p>
               I love taking complex problems, breaking them down, and delivering solutions that are both
