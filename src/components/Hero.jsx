@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "motion/react";
+import { HiOutlineDownload } from "react-icons/hi";
 import ShinyText from "./ShinyText";
 
 const EASE = [0.21, 0.47, 0.32, 0.98];
@@ -89,6 +90,14 @@ const Hero = () => {
             className="rounded-full border border-white/20 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10 active:translate-y-0"
           >
             Get In Touch
+          </a>
+          <a
+            href="/resume.pdf"
+            download
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10 active:translate-y-0"
+          >
+            <HiOutlineDownload className="h-5 w-5" />
+            Download Resume
           </a>
         </motion.div>
       </motion.div>
