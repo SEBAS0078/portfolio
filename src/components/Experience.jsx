@@ -9,9 +9,9 @@ const experience = [
     dates: "Spring 2026 – Present",
     current: true,
     bullets: [
-      "Promoted to AI Lead after assuming technical leadership responsibilities for the backend AI team, coordinating development efforts, reviewing pull requests, assigning tasks, and contributing to sprint planning and architectural decisions.",
+      "Led backend AI team as technical lead, coordinating development efforts, reviewing pull requests, assigning tasks, and contributing to Agile sprint planning and architectural decisions.",
       "Designed and implemented Retrieval-Augmented Generation (RAG) infrastructure in Python, building document ingestion pipelines that process, chunk, embed, and store knowledge in PostgreSQL/pgvector to support AI-powered knowledge retrieval.",
-      "Developed backend APIs, data models, and AI services using Python and Pydantic while researching and evaluating new technologies to improve system scalability, maintainability, and production AI workflows.",
+      "Built RESTful backend APIs, data models, and AI services using Python and Pydantic, researching and evaluating new technologies to improve system scalability, maintainability, and clean architecture.",
     ],
     tech: ["Python", "RAG", "PostgreSQL", "pgvector", "Pydantic"],
   },
@@ -24,22 +24,34 @@ const experience = [
     bullets: [
       "Developed backend workflows for AI-powered lead conversion agents, implementing Python logic that automated follow-ups, appointment scheduling, CRM updates, and integrations across HubSpot, Slack, and messaging platforms.",
       "Engineered AI agent behaviors, workflows, and tool integrations to support natural customer conversations while triggering automated business processes and coordinating multi-agent interactions.",
-      "Built client onboarding and landing pages while investigating production issues through log analysis, workflow tracing, and backend debugging to ensure reliable AI agent performance.",
+      "Diagnosed and resolved production issues through log analysis, workflow tracing, and backend debugging to ensure reliable AI agent performance.",
     ],
     tech: ["Python", "AI Agents", "HubSpot API", "Slack API"],
   },
   {
-    role: "Research Assistant",
+    role: "Machine Learning Research Assistant",
     company: "Middlebury College",
     location: "Middlebury, VT",
     dates: "Summer 2025",
     current: false,
     bullets: [
-      "Contributed to NPSV-deep, a machine learning project for structural variant genotyping using deep neural networks in PyTorch.",
-      "Implemented InfoNCE and RINCE loss functions, improving embedding-based classification accuracy by 0.5–2.9% across 4 datasets and increasing non-reference concordance by up to 3%.",
-      "Trained and evaluated deep learning models in PyTorch Lightning using TensorBoard, optimizing parameters such as temperature scalars and rank thresholds, and using version control to maintain working iterations.",
+      "Implemented InfoNCE and RINCE loss functions for NPSV-deep, a machine learning project for structural variant genotyping using deep neural networks in PyTorch, improving embedding-based classification accuracy by 0.5–2.9% across 4 datasets and increasing non-reference concordance by up to 3%.",
+      "Trained and evaluated deep learning models in PyTorch Lightning using TensorBoard, optimizing model parameters and maintaining working iterations via Git version control.",
     ],
     tech: ["PyTorch", "PyTorch Lightning", "TensorBoard", "Deep Learning"],
+  },
+  {
+    role: "Data Science Research Assistant",
+    company: "Town of Bristol",
+    location: "Bristol, VT",
+    dates: "Summer 2025",
+    current: false,
+    bullets: [
+      "Analyzed Vermont Department of Taxes data to identify Local Option Tax (LOT) adoption, category usage, and revenue trends across municipalities.",
+      "Developed 2024 LOT revenue projections for Bristol by category, accounting for the state's 30% share and data gaps to identify potential underreported revenue.",
+      "Compared LOT programs in Brandon, Middlebury, and Vergennes, synthesizing revenue allocation and local business feedback to assess economic impacts, transparency, and public support.",
+    ],
+    tech: ["Data Analysis", "Research", "Reporting"],
   },
 ];
 
