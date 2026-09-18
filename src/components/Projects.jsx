@@ -5,6 +5,15 @@ import FadeIn from "./FadeIn";
 
 const projects = [
   {
+    title: "ASCII Camera",
+    description:
+      "Real-time webcam/video/image-to-ASCII-art converter with 8 render modes (braille, half-block, ANSI, matrix, emoji), dithering, audio-reactive effects, and GIF/video export. Built end-to-end with Claude Code, from feature development through automated Playwright testing to production deployment.",
+    tech: ["p5.js", "JavaScript", "Canvas2D", "Playwright"],
+    image: "/images/ascii-art.png",
+    demo: "https://video-to-ascii.netlify.app",
+    github: "https://github.com/SEBAS0078/video-to-ascii",
+  },
+  {
     title: "PlanIQ",
     description:
       "Automatic schedule optimization that models personal scheduling as a Constraint Satisfaction Problem, using AC-3 arc consistency and backtracking search to turn to-do lists into optimized calendars. Integrates Google Calendar and Gemini for task extraction from documents.",
