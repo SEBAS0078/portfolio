@@ -7,10 +7,10 @@ const projects = [
   {
     title: "PlanIQ",
     description:
-      "Automatic schedule optimization that models personal scheduling as a Constraint Satisfaction Problem, using AC-3 arc consistency and backtracking search to turn to-do lists into optimized calendars. Integrates Google Calendar and Gemini for task extraction from documents.",
-    tech: ["Next.js", "TypeScript", "FastAPI", "Python", "Google Calendar API", "Gemini"],
+      "Full-stack AI scheduling app that turns to-do lists and entire syllabi into realistic plans on Google Calendar. Gemini extracts every task, and a custom constraint solver (backtracking with AC-3 propagation) fits each one into real free time around classes, events, working hours, and deadlines.",
+    tech: ["Next.js", "TypeScript", "FastAPI", "Python", "SQLite", "Google Calendar API", "Gemini"],
     image: "/images/planiq.png",
-    demo: "#",
+    demo: "https://planiq.tailb4183f.ts.net",
     github: "https://github.com/SEBAS0078/planIQ",
   },
   {

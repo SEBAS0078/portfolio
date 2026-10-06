@@ -16,6 +16,19 @@ const experience = [
     tech: ["Python", "RAG", "PostgreSQL", "pgvector", "Pydantic"],
   },
   {
+    role: "Creator and Full-Stack Developer",
+    company: "PlanIQ",
+    location: "Independent Project",
+    dates: "Feb 2026 – Present",
+    current: true,
+    bullets: [
+      "Designed and built an AI scheduling app end to end, using Gemini to extract tasks and syllabus assignments and a custom constraint solver in Python to place them into real free time on Google Calendar.",
+      "Built a FastAPI and SQLite backend with multi-user Google sign-in and two-way Calendar sync, and a Next.js and TypeScript frontend deployed to Google Cloud with GitHub Actions CI/CD.",
+      "Directed Claude Code as a development team, writing specs as GitHub issues and reviewing every change through branches, about 1,100 automated tests, Playwright browser tests, and CI before merging.",
+    ],
+    tech: ["Next.js", "TypeScript", "FastAPI", "Python", "SQLite", "Gemini", "Google Cloud"],
+  },
+  {
     role: "Backend Developer",
     company: "Text Maddie",
     location: "Remote",

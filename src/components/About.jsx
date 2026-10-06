@@ -5,7 +5,8 @@ import FadeIn from "./FadeIn";
 const skills = [
   "Python", "FastAPI", "Pydantic", "PostgreSQL", "React", "Next.js", "TypeScript",
   "TailwindCSS", "JavaScript", "PyTorch", "Java", "C/C++", "R", "HTML", "CSS",
-  "Supabase", "Git/GitHub", "RESTful APIs", "Agile/Scrum", "MQTT", "Node.js"
+  "Supabase", "Git/GitHub", "RESTful APIs", "Agile/Scrum", "MQTT", "Node.js",
+  "SQLite", "Gemini", "Google Calendar API", "Playwright", "GitHub Actions"
 ];
 
 const languages = [
@@ -39,7 +40,10 @@ const About = () => {
               networks in PyTorch as a Research Assistant on <strong className="text-white">NPSV-deep</strong>, a
               structural variant genotyping project at Middlebury. I also co-built{" "}
               <strong className="text-white">MiddBin</strong>, a full-stack marketplace for Middlebury students built with
-              Next.js, React, TypeScript, Java, and Supabase, serving as Scrum Master.
+              Next.js, React, TypeScript, Java, and Supabase, serving as Scrum Master. On my own, I designed and built{" "}
+              <strong className="text-white">PlanIQ</strong>, a full-stack AI scheduling app that plans tasks around your
+              Google Calendar, using Gemini and a custom constraint solver, and shipped it end to end with AI coding agents
+              as my development team.
             </p>
             <p>
               I love taking complex problems, breaking them down, and delivering solutions that are both
